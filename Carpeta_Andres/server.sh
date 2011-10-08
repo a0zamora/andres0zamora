@@ -1,0 +1,1 @@
+java -cp lib/hibernate3.jar:lib/hibernate-commons-annotations.jar:lib/hibernate-annotations.jar:lib/dom4j-1.6.1.jar:lib/commons-logging-1.1.jar:lib/ejb3-persistence.jar:lib/commons-collections-3.2.jar:lib/mysql-connector-java-5.0.3-bin.jar:lib/jta.jar:lib/antlr-2.7.6.jar:jars/servidor.jar union.ServidorChat
