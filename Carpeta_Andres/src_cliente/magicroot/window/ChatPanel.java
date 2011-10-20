@@ -63,7 +63,7 @@ public class ChatPanel extends ImagePanel {
 				});
 		add(userTextF);
 
-		sendButton = new JButton("Send");
+		sendButton = new JButton("Enviar");
 		sendButton.setBounds((int)(wid*0.01), (int)(hei*0.15), (int)(wid*0.10), (int)(hei*0.3));
 		sendButton.addActionListener(new ActionListener() {
 			@Override
@@ -87,7 +87,7 @@ public class ChatPanel extends ImagePanel {
 			chatTextA.setCaretPosition(chatTextA.getText().length() - 1);
 
 		}
-		userTextF.setText("");
+		//userTextF.setText("");
 
 	}
 
