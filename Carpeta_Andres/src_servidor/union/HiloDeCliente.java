@@ -112,16 +112,8 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 	}
 
 	public HiloDeCliente() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public boolean isCreadorDePartida() {
-		return creadorDePartida;
-	}
-
-	public void setCreadorDePartida(boolean creadorDePartida) {
-		this.creadorDePartida = creadorDePartida;
-	}
 
 	/**
 	 * Atiende el socket.
@@ -514,6 +506,15 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 		borrarConexion();
 	}
 
+	// *******************************************************************************//
+	public boolean isCreadorDePartida() {
+		return creadorDePartida;
+	}
+
+	// *******************************************************************************//
+	public void setCreadorDePartida(boolean creadorDePartida) {
+		this.creadorDePartida = creadorDePartida;
+	}
 	// *******************************************************************************//
 	// **                                SIN USO                                    **//
 	// *******************************************************************************//
