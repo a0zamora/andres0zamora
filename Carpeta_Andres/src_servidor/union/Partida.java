@@ -362,6 +362,8 @@ public class Partida {
 		} catch (IdCreadorInvalido e) {
 			e.printStackTrace();
 		}
+		tablero.actualizarTablero();
+		tablero.enviarActualizacoinTablero();
 
 	}
 

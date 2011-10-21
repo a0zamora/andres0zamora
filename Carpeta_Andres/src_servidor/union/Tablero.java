@@ -1222,7 +1222,6 @@ public class Tablero extends Card {
 
 		switch (r) {
 		case 0:
-
 			this.elemento = Elemento.agua;
 			break;
 		case 1:
