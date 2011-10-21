@@ -132,113 +132,88 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 			while (corriendo) {
 
 				String texto = dataInput.readUTF();
+				
 				if (texto.startsWith(VersionCommand.CADENA_COMANDO)) {
-					System.out.println("1");
-					VersionCommand comando = new VersionCommand(texto);
-					// si las versiones son iguales
-					Pattern p = Pattern.compile(" ");
-					String[] partes = p.split(Version.VERSION);
-					int tamPartes = partes.length;
-					for (int k = 0; k < tamPartes; k++) {
-						if (partes[k].startsWith(comando.getVersion())) {
-							Command comandoCheck = new HandCheck(id);
-							// enviarMensaje(comandoCheck.convertirAString());
-							handCheck = true;
-							break;
-						}
-
-					}// si no econtro una version soportada
-					if (!handCheck) {
-						// envia el comando de cliente no encontrador
-						Command clientCommand = new ClientNotFound(id);
-						enviarMensaje(clientCommand.convertirAString());
-						// mata el hilo
-						corriendo = false;
-						borrarRegistro();
-						BorrarConexionCommand borrar = new BorrarConexionCommand(
-								"Borrar_Conexion " + Integer.toString(id) + " "
-										+ nombreUsr);
-						enviar_a_Todos(borrar.convertirString());
-						borrarConexion();
-					}
+					
+					verificarVersionServidor(texto);
+					
 				} else if (texto.startsWith(CrearCommand.CADENA_COMANDO)) {
+					
 					crearPartida();
 					Command comando = new CrearCommand(id);
 					partida.enviarMensajeMaquina(comando);
-				} else if (texto.startsWith(Mi_IdCommand.CADENA_COMANDO)
-						&& !idCliente) {
-					Mi_IdCommand comando = new Mi_IdCommand(texto);
-					id = comando.getId();
-					nombreUsr = comando.getNombreUsr();
-					Command conexion = new ConexionNuevaCommand(
-							ConexionNuevaCommand.CADENA_COMANDO + " "
-									+ Integer.toString(id) + " "
-									+ comando.getNombreUsr());
-					enviarConectados();
-					ClienteConexion nuevo = new ClienteConexion(
-							Integer.toString(id), nombreUsr);
-					listaClienteConexion.add(nuevo);
-					enviar_a_Todos(conexion.convertirAString());
-					idCliente = true;
-					setInfo();
+					
+				} else if (texto.startsWith(Mi_IdCommand.CADENA_COMANDO) && !idCliente) {
+					
+					procesarMiIdComando(texto);
 
 				} else if (texto.startsWith("eliminar_partida")) {
+					
 					eliminarPartida();
-				} else if (texto
-						.startsWith(DesconectarInvitadoCommand.CADENA_COMANDO)) {
+					
+				} else if (texto.startsWith(DesconectarInvitadoCommand.CADENA_COMANDO)) {
+					
 					partida.sacarInvitado();
 				}
-				// se envian los ID de las 8 cartas en le comando para verificar
+				
 				else if (texto.startsWith(JugListoCommand.CADENA_COMANDO)) {
+					
 					Command comando = new JugListoCommand(texto);
 					if (partida.llenarListaCartas(comando)) {
 						partida.enviarMensajeMaquina(comando);
-
 					} else {
 						comando = new ServerKick(id);
 						partida.enviar(comando);
 					}
-					// el usuario cambio de tablero
-				} else if (texto
-						.startsWith(EleguirTableroCommand.CADENA_COMANDO)) {
+					
+				} else if (texto.startsWith(EleguirTableroCommand.CADENA_COMANDO)) {
 					Command comando = new EleguirTableroCommand(texto);
 					partida.enviarMensajeMaquina(comando);
 
-				} else if (texto
-						.startsWith(JugDesconectadoRoomCommand.CADENA_COMANDO)) {
-					// cambar este parametro id por texto
-					// !!!!!
-					//
+				} else if (texto.startsWith(JugDesconectadoRoomCommand.CADENA_COMANDO)) {
+
 					Command comando = new JugDesconectadoRoomCommand(id);
 					desconectarRoom(comando);
+					
 				} else if (texto.equals(EnviarConectadosCommand.CADENA_COMANDO)) {
+					
 					enviarConexiones();
+					
 				} else if (texto.startsWith(UnirCommand.CADENA_COMANDO)) {
+					
 					Command comando = new UnirCommand(texto);
-					unirPartida(comando);
-					// cambar este parametro id por texto
-					// !!!!!
-					//
-					comando = new UnirCommand(id);
-					partida.enviarMensajeMaquina(comando);
+
+					if (unirPartida(comando)) {
+						comando = new UnirCommand(id);
+						partida.enviarMensajeMaquina(comando);
+					}
+					else{
+						comando = new JugDesconectadoRoomCommand(id);
+						enviarMensaje(comando.convertirAString());
+					}
+					
 				} else if (texto.startsWith(JugarCommand.CADENA_COMANDO)) {
+					
 					Command comando = new JugarCommand(texto);
 					partida.enviarMensajeMaquina(comando);
 
 				} else if (texto.startsWith(GameOver.CADENA_COMANDO)) {
+					
 					Command comando = new GameOver(texto);
 					partida.enviarMensajeMaquina(comando);
 
 				} else if (texto.startsWith(RevanchaAzulCommand.CADENA_COMANDO)) {
+					
 					Command comando = new RevanchaAzulCommand(texto);
 					partida.enviarMensajeMaquina(comando);
 
 				} else if (texto.startsWith(RevanchaRojoCommand.CADENA_COMANDO)) {
+					
 					Command comando = new   RevanchaRojoCommand(texto);
 					partida.enviarMensajeMaquina(comando);
 
-				} else if (texto
-						.startsWith(DesconexionJugandoCommand.CADENA_COMANDO)) {
+				} else if (texto.startsWith(DesconexionJugandoCommand.CADENA_COMANDO)) {
+					
 					if (estado && creadorDePartida) {
 						Command comando = new JugDesconectadoRoomCommand(id);
 						desconectarRoom(comando);
@@ -247,9 +222,13 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 						desconectarRoom(comando);
 					}
 				} else if (estado) {
+					
 					partida.enviarMensajeRoom(texto, id);
+					
 				} else if (texto.startsWith("mostrar_partidas")) {
+					
 					partidasCliente();
+					
 				}
 
 				else {
@@ -258,31 +237,64 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 			}
 
 		} catch (Exception e) {
-			System.out.println("---exepcion---");
-			System.out.println(e);
-			System.out.println("---exepcion---");
-			corriendo = false;
-			if (estado && creadorDePartida) {
-				Command comando = new JugDesconectadoRoomCommand(id);
-				desconectarRoom(comando);
-			} else if (!estado && creadorDePartida) {
-				eliminarPartida();
-			} else if (estado && !creadorDePartida) {
-				Command comando = new JugDesconectadoRoomCommand(id);
-				desconectarRoom(comando);
+			
+			manejarDesconexion();
+			
+		} // fin del manejo de la exepcion
+	}
+
+	//*********************************************************************//
+	//***                            Metodos                            ***//
+	//*********************************************************************//
+	public void procesarMiIdComando(String texto) {
+
+		Mi_IdCommand comando = new Mi_IdCommand(texto);
+		id = comando.getId();
+		nombreUsr = comando.getNombreUsr();
+		Command conexion = new ConexionNuevaCommand(
+				ConexionNuevaCommand.CADENA_COMANDO + " "
+						+ Integer.toString(id) + " "
+						+ comando.getNombreUsr());
+		enviarConectados();
+		ClienteConexion nuevo = new ClienteConexion(
+				Integer.toString(id), nombreUsr);
+		listaClienteConexion.add(nuevo);
+		enviar_a_Todos(conexion.convertirAString());
+		idCliente = true;
+		setInfo();
+	}
+	// *******************************************************************************//
+
+	public void verificarVersionServidor(String texto) {
+
+		VersionCommand comando = new VersionCommand(texto);
+		// si las versiones son iguales
+		Pattern p = Pattern.compile(" ");
+		String[] partes = p.split(Version.VERSION);
+		int tamPartes = partes.length;
+		for (int k = 0; k < tamPartes; k++) {
+			if (partes[k].startsWith(comando.getVersion())) {
+				Command comandoCheck = new HandCheck(id);
+				// enviarMensaje(comandoCheck.convertirAString());
+				handCheck = true;
+				break;
 			}
+
+		}// si no econtro una version soportada
+		if (!handCheck) {
+			// envia el comando de cliente no encontrador
+			Command clientCommand = new ClientNotFound(id);
+			enviarMensaje(clientCommand.convertirAString());
+			// mata el hilo
+			corriendo = false;
 			borrarRegistro();
 			BorrarConexionCommand borrar = new BorrarConexionCommand(
 					"Borrar_Conexion " + Integer.toString(id) + " " + nombreUsr);
 			enviar_a_Todos(borrar.convertirString());
 			borrarConexion();
-		} // fin del manejo de la exepcion
+		}
 	}
-
-	// *********************************************************************//
-	// *** INTERFAZ ***//
-	// *********************************************************************//
-
+	// *******************************************************************************//
 	/**
 	 * Envía el último texto de la charla por el socket. Se avisa a este método
 	 * cada vez que se mete algo en charla, incluido cuando lo mete este mismo
@@ -367,8 +379,9 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 			}
 		}
 	}
+	// *******************************************************************************//
 
-	public void unirPartida(Command comando) {
+	public boolean unirPartida(Command comando) {
 		estado = true;
 		for (int i = 0; i < partidas.size(); i++) {
 			if ((comando.getId() == partidas.get(i).getId())
@@ -381,9 +394,10 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 					charla.addElement("Eliminar "
 							+ Integer.toHexString(partida.getId()));
 				}
-				break;
+				return true;
 			}
 		}
+		return false;
 
 	}
 
@@ -481,9 +495,27 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 
 		}
 	}
+	// *******************************************************************************//
+	public void manejarDesconexion() {
+		corriendo = false;
+		if (estado && creadorDePartida) {
+			Command comando = new JugDesconectadoRoomCommand(id);
+			desconectarRoom(comando);
+		} else if (!estado && creadorDePartida) {
+			eliminarPartida();
+		} else if (estado && !creadorDePartida) {
+			Command comando = new JugDesconectadoRoomCommand(id);
+			desconectarRoom(comando);
+		}
+		borrarRegistro();
+		BorrarConexionCommand borrar = new BorrarConexionCommand(
+				"Borrar_Conexion " + Integer.toString(id) + " " + nombreUsr);
+		enviar_a_Todos(borrar.convertirString());
+		borrarConexion();
+	}
 
 	// *******************************************************************************//
-	// ** SIN USO **//
+	// **                                SIN USO                                    **//
 	// *******************************************************************************//
 	public void intervalRemoved(ListDataEvent e) {
 	}
