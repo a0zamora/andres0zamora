@@ -37,7 +37,7 @@ public class LLenarBaseDatos {
 			carta1.setFuerzasur(1);
 			carta1.setFuerzaeste(4);
 			carta1.setFuerzaoeste(5);
-			carta1.setElemento("Agua");
+			carta1.setElemento("agua");
 			costoCarta = establecerCosto(carta1.getFuerzanorte()+carta1.getFuerzasur()+carta1.getFuerzaeste()+carta1.getFuerzaoeste());
 			carta1.setCosto(costoCarta);
 			carta1.setSumafuerzas(carta1.getFuerzanorte()+carta1.getFuerzasur()+carta1.getFuerzaeste()+carta1.getFuerzaoeste());
@@ -47,7 +47,7 @@ public class LLenarBaseDatos {
 			carta2.setFuerzasur(1);
 			carta2.setFuerzaeste(3);
 			carta2.setFuerzaoeste(5);
-			carta2.setElemento("Agua");
+			carta2.setElemento("agua");
 			costoCarta = establecerCosto(carta2.getFuerzanorte()+carta2.getFuerzasur()+carta2.getFuerzaeste()+carta2.getFuerzaoeste());
 			carta2.setCosto(costoCarta);
 			carta2.setSumafuerzas(carta2.getFuerzanorte()+carta2.getFuerzasur()+carta2.getFuerzaeste()+carta2.getFuerzaoeste());
@@ -57,7 +57,7 @@ public class LLenarBaseDatos {
 			carta3.setFuerzasur(2);
 			carta3.setFuerzaeste(2);
 			carta3.setFuerzaoeste(3);
-			carta3.setElemento("Agua");
+			carta3.setElemento("agua");
 			costoCarta = establecerCosto(carta3.getFuerzanorte()+carta3.getFuerzasur()+carta3.getFuerzaeste()+carta3.getFuerzaoeste());
 			carta3.setCosto(costoCarta);
 			carta3.setSumafuerzas(carta3.getFuerzanorte()+carta3.getFuerzasur()+carta3.getFuerzaeste()+carta3.getFuerzaoeste());
@@ -67,7 +67,7 @@ public class LLenarBaseDatos {
 			carta4.setFuerzasur(2);
 			carta4.setFuerzaeste(1);
 			carta4.setFuerzaoeste(6);
-			carta4.setElemento("Agua");
+			carta4.setElemento("agua");
 			costoCarta = establecerCosto(carta4.getFuerzanorte()+carta4.getFuerzasur()+carta4.getFuerzaeste()+carta4.getFuerzaoeste());
 			carta4.setCosto(costoCarta);
 			carta4.setSumafuerzas(carta4.getFuerzanorte()+carta4.getFuerzasur()+carta4.getFuerzaeste()+carta4.getFuerzaoeste());
@@ -77,7 +77,7 @@ public class LLenarBaseDatos {
 			carta5.setFuerzasur(2);
 			carta5.setFuerzaeste(5);
 			carta5.setFuerzaoeste(1);
-			carta5.setElemento("Agua");
+			carta5.setElemento("agua");
 			costoCarta = establecerCosto(carta5.getFuerzanorte()+carta5.getFuerzasur()+carta5.getFuerzaeste()+carta5.getFuerzaoeste());
 			carta5.setCosto(costoCarta);
 			carta5.setSumafuerzas(carta5.getFuerzanorte()+carta5.getFuerzasur()+carta5.getFuerzaeste()+carta5.getFuerzaoeste());
@@ -87,7 +87,7 @@ public class LLenarBaseDatos {
 			carta6.setFuerzasur(1);
 			carta6.setFuerzaeste(1);
 			carta6.setFuerzaoeste(3);
-			carta6.setElemento("Agua");
+			carta6.setElemento("agua");
 			costoCarta = establecerCosto(carta6.getFuerzanorte()+carta6.getFuerzasur()+carta6.getFuerzaeste()+carta6.getFuerzaoeste());
 			carta6.setCosto(costoCarta);
 			carta6.setSumafuerzas(carta6.getFuerzanorte()+carta6.getFuerzasur()+carta6.getFuerzaeste()+carta6.getFuerzaoeste());
@@ -97,7 +97,7 @@ public class LLenarBaseDatos {
 			carta7.setFuerzasur(4);
 			carta7.setFuerzaeste(1);
 			carta7.setFuerzaoeste(4);
-			carta7.setElemento("Agua");
+			carta7.setElemento("agua");
 			costoCarta = establecerCosto(carta7.getFuerzanorte()+carta7.getFuerzasur()+carta7.getFuerzaeste()+carta7.getFuerzaoeste());
 			carta7.setCosto(costoCarta);
 			carta7.setSumafuerzas(carta7.getFuerzanorte()+carta7.getFuerzasur()+carta7.getFuerzaeste()+carta7.getFuerzaoeste());
@@ -107,7 +107,7 @@ public class LLenarBaseDatos {
 			carta8.setFuerzasur(4);
 			carta8.setFuerzaeste(5);
 			carta8.setFuerzaoeste(1);
-			carta8.setElemento("Agua");
+			carta8.setElemento("agua");
 			costoCarta = establecerCosto(carta8.getFuerzanorte()+carta8.getFuerzasur()+carta8.getFuerzaeste()+carta8.getFuerzaoeste());
 			carta8.setCosto(costoCarta);
 			carta8.setSumafuerzas(carta8.getFuerzanorte()+carta8.getFuerzasur()+carta8.getFuerzaeste()+carta8.getFuerzaoeste());
@@ -117,7 +117,7 @@ public class LLenarBaseDatos {
 			carta9.setFuerzasur(4);
 			carta9.setFuerzaeste(2);
 			carta9.setFuerzaoeste(3);
-			carta9.setElemento("Agua");
+			carta9.setElemento("agua");
 			costoCarta = establecerCosto(carta9.getFuerzanorte()+carta9.getFuerzasur()+carta9.getFuerzaeste()+carta9.getFuerzaoeste());
 			carta9.setCosto(costoCarta);
 			carta9.setSumafuerzas(carta9.getFuerzanorte()+carta9.getFuerzasur()+carta9.getFuerzaeste()+carta9.getFuerzaoeste());
@@ -127,7 +127,7 @@ public class LLenarBaseDatos {
 			carta10.setFuerzasur(3);
 			carta10.setFuerzaeste(3);
 			carta10.setFuerzaoeste(5);
-			carta10.setElemento("Agua");
+			carta10.setElemento("agua");
 			costoCarta = establecerCosto(carta10.getFuerzanorte()+carta10.getFuerzasur()+carta10.getFuerzaeste()+carta10.getFuerzaoeste());
 			carta10.setCosto(costoCarta);
 			carta10.setSumafuerzas(carta10.getFuerzanorte()+carta10.getFuerzasur()+carta10.getFuerzaeste()+carta10.getFuerzaoeste());
@@ -137,7 +137,7 @@ public class LLenarBaseDatos {
 			carta11.setFuerzasur(8);
 			carta11.setFuerzaeste(2);
 			carta11.setFuerzaoeste(6);
-			carta11.setElemento("Agua");
+			carta11.setElemento("agua");
 			costoCarta = establecerCosto(carta11.getFuerzanorte()+carta11.getFuerzasur()+carta11.getFuerzaeste()+carta11.getFuerzaoeste());
 			carta11.setCosto(costoCarta);
 			carta11.setSumafuerzas(carta11.getFuerzanorte()+carta11.getFuerzasur()+carta11.getFuerzaeste()+carta11.getFuerzaoeste());
@@ -147,7 +147,7 @@ public class LLenarBaseDatos {
 			carta12.setFuerzasur(2);
 			carta12.setFuerzaeste(5);
 			carta12.setFuerzaoeste(1);
-			carta12.setElemento("Agua");
+			carta12.setElemento("agua");
 			costoCarta = establecerCosto(carta12.getFuerzanorte()+carta12.getFuerzasur()+carta12.getFuerzaeste()+carta12.getFuerzaoeste());
 			carta12.setCosto(costoCarta);
 			carta12.setSumafuerzas(carta12.getFuerzanorte()+carta12.getFuerzasur()+carta12.getFuerzaeste()+carta12.getFuerzaoeste());
@@ -157,7 +157,7 @@ public class LLenarBaseDatos {
 			carta13.setFuerzasur(2);
 			carta13.setFuerzaeste(6);
 			carta13.setFuerzaoeste(4);
-			carta13.setElemento("Agua");
+			carta13.setElemento("agua");
 			costoCarta = establecerCosto(carta13.getFuerzanorte()+carta13.getFuerzasur()+carta13.getFuerzaeste()+carta13.getFuerzaoeste());
 			carta13.setCosto(costoCarta);
 			carta13.setSumafuerzas(carta13.getFuerzanorte()+carta13.getFuerzasur()+carta13.getFuerzaeste()+carta13.getFuerzaoeste());
@@ -167,7 +167,7 @@ public class LLenarBaseDatos {
 			carta14.setFuerzasur(5);
 			carta14.setFuerzaeste(1);
 			carta14.setFuerzaoeste(6);
-			carta14.setElemento("Agua");
+			carta14.setElemento("agua");
 			costoCarta = establecerCosto(carta14.getFuerzanorte()+carta14.getFuerzasur()+carta14.getFuerzaeste()+carta14.getFuerzaoeste());
 			carta14.setCosto(costoCarta);
 			carta14.setSumafuerzas(carta14.getFuerzanorte()+carta14.getFuerzasur()+carta14.getFuerzaeste()+carta14.getFuerzaoeste());
@@ -177,7 +177,7 @@ public class LLenarBaseDatos {
 			carta15.setFuerzasur(1);
 			carta15.setFuerzaeste(1);
 			carta15.setFuerzaoeste(3);
-			carta15.setElemento("Agua");
+			carta15.setElemento("agua");
 			costoCarta = establecerCosto(carta15.getFuerzanorte()+carta15.getFuerzasur()+carta15.getFuerzaeste()+carta15.getFuerzaoeste());
 			carta15.setCosto(costoCarta);
 			carta15.setSumafuerzas(carta15.getFuerzanorte()+carta15.getFuerzasur()+carta15.getFuerzaeste()+carta15.getFuerzaoeste());

@@ -39,8 +39,8 @@ public class Interface implements MyUIListener, Runnable {
 		
         try
         {
-    		//socket = new Socket("localhost", 5557);
-    		socket = new Socket("150.185.180.170", 5557);
+    		socket = new Socket("localhost", 5557);
+    		//socket = new Socket("150.185.180.170", 5557);
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
             Thread socketsThread = new Thread(this);

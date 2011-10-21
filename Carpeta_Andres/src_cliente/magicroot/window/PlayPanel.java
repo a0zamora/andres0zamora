@@ -813,7 +813,6 @@ public class PlayPanel extends ImagePanel {
 				else {
 					if (card.getEnable()) {
 						card.changeImage("CardsJPG/card1-8.jpg");
-						System.err.println("Carta "+i+"generica");
 					} 
 					else {
 						card.setPlusIcon(false);

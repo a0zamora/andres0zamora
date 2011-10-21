@@ -51,25 +51,7 @@ public class ServidorChat
      */
     public ServidorChat()
     {
-    	listaPartidas = new ArrayList<Partida>();
-    	listaClienteConexion = new ArrayList<ClienteConexion>();
-    	Session session = SessionHibernate.getInstance().getSession();
-    	session.beginTransaction();
-    	List<VerificarLogin> lista;
-    	lista = session.createCriteria(VerificarLogin.class).list();
-    	if(!lista.isEmpty()){
-    		for(int i=0;i<lista.size();i++){
-    				session.delete(lista.get(i));
-    				   		}
-    		session.getTransaction().commit();
-			session.close();
-
-    	}
-    	else{
-    		session.getTransaction().commit();
-    		session.close();
-    	}
-    	
+    	IniciarTablaRegistro();
     	
     	int i=0;
         try
@@ -88,5 +70,26 @@ public class ServidorChat
         {
             e.printStackTrace();
         }
-    }
+	}
+
+	 public void IniciarTablaRegistro() {
+		listaPartidas = new ArrayList<Partida>();
+		listaClienteConexion = new ArrayList<ClienteConexion>();
+		Session session = SessionHibernate.getInstance().getSession();
+		session.beginTransaction();
+		List<VerificarLogin> lista;
+		lista = session.createCriteria(VerificarLogin.class).list();
+		if (!lista.isEmpty()) {
+			for (int i = 0; i < lista.size(); i++) {
+				session.delete(lista.get(i));
+			}
+			session.getTransaction().commit();
+			session.close();
+
+		} else {
+			session.getTransaction().commit();
+			session.close();
+		}
+	}
+	
 }

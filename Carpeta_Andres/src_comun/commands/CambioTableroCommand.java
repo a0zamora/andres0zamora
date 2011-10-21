@@ -70,19 +70,15 @@ public CambioTableroCommand(String str) {
 		switch (elemento) {
 		
 		case agua:
-			System.out.println("agua");
 			this.elemento = 0;
 			break;
 		case fuego:
-			System.out.println("fuego");
 			this.elemento = 1;
 			break;
 		case aire:
-			System.out.println("aire");
 			this.elemento = 2;
 			break;
 		case tierra:
-			System.out.println("tierra");
 			this.elemento = 3;
 			break;
 		default:

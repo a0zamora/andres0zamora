@@ -165,7 +165,7 @@ public class LoginFrame extends JFrame {
 				j.setCorreo(addressTf.getText());
 				j.setClave(c);
 
-				if (nameTf.getText().length() < 10
+				if (nameTf.getText().length() < 17
 						&& nameTf.getText().length() > 3) {
 					if (c.length() < 17 && c.length() > 3) {
 						if (base.guardar(j) == true) {

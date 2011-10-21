@@ -9,8 +9,8 @@ import cliente.ServiciosWebService;
 
 public class WebServiceFactory {
 
-	public static final String SERVER_IP = "150.185.180.170";
-//public static final String SERVER_IP = "localhost";
+	//public static final String SERVER_IP = "150.185.180.170";
+    public static final String SERVER_IP = "localhost";
 
 	public static final ServiciosWebService createBasesDatosService() {
 
