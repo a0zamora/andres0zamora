@@ -64,7 +64,6 @@ public class ServidorChat
                 Thread hilo = new Thread(nuevoCliente);
                 hilo.start();
                 i++;
-                System.err.println(listaPartidas.size());
             }
         } catch (Exception e)
         {
