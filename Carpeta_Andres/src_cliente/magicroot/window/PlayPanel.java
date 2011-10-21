@@ -65,6 +65,7 @@ public class PlayPanel extends ImagePanel {
 	private MainFrame mf;
 	private JProgressBar myProgressBar;
 	private JProgressBar enemyProgressBar;
+	private String newTable;
 
 	public PlayPanel(MyEvent evt, int w, int h, MainFrame m,
 			ActivePlayer aPlayer) {
@@ -367,6 +368,7 @@ public class PlayPanel extends ImagePanel {
 						playerCards, player.getPlayingCards().get(c));
 				c++;
 			}
+		pintarCartasUsr();
 	}
 
 	public void setPlayer(ActivePlayer p) {
@@ -643,9 +645,9 @@ public class PlayPanel extends ImagePanel {
 	}
 
 	public void updateTableElement(MyEvent evt) {
-
+		newTable = new String();
 		CambioTableroCommand c = new CambioTableroCommand(evt.getData());
-		String newTable = "AquaTable";
+		newTable = "AquaTable";
 		if (c.getElemento() == 1)
 			newTable = "FireTable";
 		if (c.getElemento() == 2)
@@ -653,6 +655,7 @@ public class PlayPanel extends ImagePanel {
 		if (c.getElemento() == 3)
 			newTable = "EarthTable";
 		changeImage("CardsJPG/" + newTable + ".jpg");
+		pintarCartasUsr();
 		updateUI();
 		repaint();
 		updateUI();
@@ -798,6 +801,7 @@ public class PlayPanel extends ImagePanel {
 	}
 
 	public void setAditionalCardPoint(MyEvent evt) {
+		pintarCartasUsr();
 		ActualizarTablero c = new ActualizarTablero (evt.getData());
 		PlayCard card;
 		List<PosicionBean> list = c.getList();
@@ -824,5 +828,36 @@ public class PlayPanel extends ImagePanel {
 				card.repaint();
 			}
 
+	}
+	
+	public void pintarCartasUsr() {
+		PlayCard cartica;
+		String elemento = new String(); 
+		elemento = "agua";
+		if(newTable.equals("WindTable")){
+			elemento= "aire";
+		}
+		if(newTable.equals("FireTable")){
+			elemento= "fuego";
+		}
+		if(newTable.equals("EarthTable")){
+			elemento= "tierra";
+		}
+		for(int i=0; i<4; i++){
+			for(int j=0; j<2; j++){
+
+				cartica = playerCards.getCard(i, j);
+				if (cartica != null) {
+					if (cartica.getEleStr().equals(elemento)) {
+						cartica.setPlusIcon(true);
+						cartica.initBufferedImage();
+					}
+					else{
+						cartica.setPlusIcon(false);
+						cartica.initBufferedImage();
+					}
+				}
+			}
+		}
 	}
 }
