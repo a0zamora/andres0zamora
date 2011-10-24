@@ -163,8 +163,9 @@ public class RoomPanel extends ImagePanel {
 			public void mouseClicked(MouseEvent e) {
 				PlayCard card;
 				card = selectedCards.cardOnPoint(e.getPoint());
-				if (card != null
-						&& ((!invitedReady && !isCreator) || (isCreator))) {
+				if (card != null && ((!invitedReady && !isCreator) || (isCreator))) {
+					card.setPlusIcon(false);
+					card.initBufferedImage();
 					pgCardsPanel.setCardEnable(card.getId());
 					selectedCards.dropCard(card.getId());
 					card.changeImage("");
