@@ -93,12 +93,11 @@ public class PageableCardsPanel extends ImagePanel {
 			public void mouseClicked(MouseEvent e) {
 				PlayCard card;
 				card = pack.cardOnPoint(e.getPoint());
-				if(card!=null && card.getEnable()==true && selectable==true){
-					card.setPlusIcon(true);
+				if(card!=null && card.getEnable() && selectable){
+					//card.setPlusIcon(true);
+					card.setRdyIcon(true);
 					card.initBufferedImage();
 					((ImagePanel)listener).paintSelectedCard(card);
-					
-					
 				}
 			}
 		});
@@ -217,7 +216,8 @@ public class PageableCardsPanel extends ImagePanel {
 			if(card.getId().equals(id)){
 
 				card.setEnable(true);
-				card.setPlusIcon(false);
+				card.setRdyIcon(false);
+				//card.setPlusIcon(false);
 				card.initBufferedImage();
 			}
 		}

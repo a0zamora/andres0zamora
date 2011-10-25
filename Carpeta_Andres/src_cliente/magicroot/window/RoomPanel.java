@@ -164,12 +164,14 @@ public class RoomPanel extends ImagePanel {
 				PlayCard card;
 				card = selectedCards.cardOnPoint(e.getPoint());
 				if (card != null && ((!invitedReady && !isCreator) || (isCreator))) {
-					card.setPlusIcon(false);
+					//card.setPlusIcon(false);
+					card.setRdyIcon(false);
 					card.initBufferedImage();
 					pgCardsPanel.setCardEnable(card.getId());
 					selectedCards.dropCard(card.getId());
 					card.changeImage("");
 					remove(card);
+					pgCardsPanel.setSelectable(true);
 					repaint();
 					if (startButton.isEnabled()) {
 						startButton.setEnabled(false);
@@ -239,6 +241,9 @@ public class RoomPanel extends ImagePanel {
 		repaint();
 		if (selectedCards.getSize() == 8 && (invitedReady || !isCreator)) {
 			startButton.setEnabled(true);
+		}
+		if (selectedCards.getSize() == 8){
+			pgCardsPanel.setSelectable(false);
 		}
 	}
 

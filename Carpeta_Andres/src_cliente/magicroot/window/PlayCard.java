@@ -19,6 +19,7 @@ public class PlayCard extends ImagePanel {
 	private int cont = 10;
 	private BufferedImage bimg;
 	private String bimgPlusName = "CardsPNG/Bimg/plus.png";
+	private String bimgRdyName = "CardsPNG/Bimg/listoIcon.png";
 	private String bimgBackGroundName;
 	private String bimgCenterName;
 	private String bimgTopName;
@@ -35,7 +36,8 @@ public class PlayCard extends ImagePanel {
 	private int idOferta;
 	private boolean moving = false;
 	private boolean enable = true;
-	private boolean plusIcon =false;
+	private boolean plusIcon = false;
+	private boolean rdyIcon = false;
 
 	public PlayCard() {
 		initCard("0", "", 0, 0, 0, 0, 0);
@@ -44,7 +46,7 @@ public class PlayCard extends ImagePanel {
 		bimgCenterName ="";
 	}
 
-//	public PlayCard(String i, String n, int l, int r, int t, int d, int e, int c) {
+//	public PlayCard(String ib, String n, int l, int r, int t, int d, int e, int c) {
 //		img = new ImageIcon(n).getImage();
 //		initCard(i, n, l, r, t, d, e, c);
 //		changeImage(img);
@@ -147,6 +149,12 @@ public class PlayCard extends ImagePanel {
 					(int) (0), (int) (getWidth() * 0.30),
 					(int) (getHeight() * 0.30), null);
 		}
+		if (rdyIcon) {
+			g2d.drawImage(new ImageIcon(bimgRdyName).getImage(), (int) (5),
+					(int) (0), (int) (getWidth() * 0.30),
+					(int) (getHeight() * 0.30), null);
+		}
+		
 		
 		changeImage(Toolkit.getDefaultToolkit().createImage(bimg.getSource()) );	
 	}
@@ -350,6 +358,12 @@ public class PlayCard extends ImagePanel {
 
 	public boolean getPlusIcon() {
 		return this.plusIcon;
+	}
+	public void setRdyIcon(boolean b) {
+		this.rdyIcon = b;
+	}
+	public boolean getRdyIcon() {
+		return rdyIcon;
 	}
 
 }
