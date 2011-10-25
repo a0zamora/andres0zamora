@@ -45,7 +45,9 @@ import commands.VersionCommand;
  * @author andres
  */
 public class HiloDeCliente implements Runnable, ListDataListener {
+	/** Para saber si esta vivo el hilo */
 	private boolean corriendo = true;
+	
 	/** Lista en la que se guarda toda la charla */
 	private DefaultListModel charla;
 
@@ -287,12 +289,6 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 		}
 	}
 	// *******************************************************************************//
-	/**
-	 * Envía el último texto de la charla por el socket. Se avisa a este método
-	 * cada vez que se mete algo en charla, incluido cuando lo mete este mismo
-	 * hilo. De esta manera, lo que un cliente escriba, se le reenviará para que
-	 * se muestre en el textArea.
-	 */
 	public void intervalAdded(ListDataEvent e) {
 		String texto = (String) charla.getElementAt(e.getIndex0());
 		if ((corriendo && !estado)
