@@ -21,6 +21,7 @@ public class MenuPanel extends ImagePanel {
 	private MyButton createRoom;
 	private MyButton deleteRoom;
 	private MyButton leaveRoom;
+	private MyButton agentRoom;
 	private ActivePlayer player;
 
 	public MenuPanel(int w, int h) {
@@ -123,6 +124,7 @@ public class MenuPanel extends ImagePanel {
 				goToLobby.setEnabled(true);
 				createRoom.setEnabled(true);
 				leaveRoom.setEnabled(false);
+				deleteRoom.setVisible(false);
 				deleteRoom.setEnabled(false);
 				player.setColor(0);
 
@@ -134,6 +136,7 @@ public class MenuPanel extends ImagePanel {
 			}
 		});
 		deleteRoom.setEnabled(false);
+		deleteRoom.setVisible(false);
 		add(deleteRoom);
 
 		leaveRoom = new MyButton("", 0, "buttons/desertar1.jpg",
@@ -151,6 +154,7 @@ public class MenuPanel extends ImagePanel {
 				goToLobby.setEnabled(true);
 				createRoom.setEnabled(true);
 				leaveRoom.setEnabled(false);
+				leaveRoom.setVisible(false);
 				leaveRoom.setEnabled(false);
 				player.setColor(0);
 				fireMultiPanelEvent(new MyEvent(MenuPanel.this, "lobby"),
@@ -162,7 +166,27 @@ public class MenuPanel extends ImagePanel {
 			}
 		});
 		leaveRoom.setEnabled(false);
+		leaveRoom.setVisible(false);
 		add(leaveRoom);
+		
+		agentRoom = new MyButton("", 0, "buttons/agente.jpg",
+				"buttons/agente3.jpg", "buttons/agente2.jpg", 
+				"buttons/agente.jpg");
+		agentRoom.setBounds((int) (wid * 0.3), (int) (hei * 0.65),
+				(int) (wid * 0.4), (int) (hei * 0.32));
+		agentRoom.SetImages();
+		agentRoom.setVisible(true);
+		agentRoom.setEnabled(true);
+		agentRoom.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//Para poner lo que va a pasar cuando se toque este boton.
+				
+			}
+		});
+		agentRoom.setToolTipText("Jugar VS Maquina");
+		add(agentRoom);
 	}
 
 	public void addMenuPanelListener(MyListener listener) {
@@ -195,7 +219,19 @@ public class MenuPanel extends ImagePanel {
 			}
 		}
 	}
-
+/**
+ * Letras para losBotones
+ * 
+ * Fuente Viking
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 	protected void fireServerEvent(MyEvent evt, int action) {
 
 	}
@@ -214,8 +250,10 @@ public class MenuPanel extends ImagePanel {
 		goToProfile.setEnabled(true);
 		goToLobby.setEnabled(true);
 		createRoom.setEnabled(true);
+		leaveRoom.setVisible(false);
 		leaveRoom.setEnabled(false);
 		deleteRoom.setEnabled(false);
+		agentRoom.setVisible(true);
 
 	}
 
@@ -226,10 +264,16 @@ public class MenuPanel extends ImagePanel {
 		createRoom.setEnabled(false);
 		if (creator) {
 			leaveRoom.setEnabled(false);
+			leaveRoom.setVisible(false);
+			deleteRoom.setVisible(true);
 			deleteRoom.setEnabled(true);
+			agentRoom.setVisible(false);
 		} else {
 			leaveRoom.setEnabled(true);
+			leaveRoom.setVisible(true);
+			deleteRoom.setVisible(false);
 			deleteRoom.setEnabled(false);
+			agentRoom.setVisible(false);
 		}
 	}
 }
