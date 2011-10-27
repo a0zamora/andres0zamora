@@ -182,6 +182,17 @@ public class MenuPanel extends ImagePanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//Para poner lo que va a pasar cuando se toque este boton.
+				player.setColor(1);
+				player.setPlaying(true);
+				// parametro "a" creador es azul
+				fireMultiPanelEvent(new MyEvent(MenuPanel.this, "a"),
+						MyListener.SHOW_ROOM);
+
+				CrearCommand c = new CrearCommand(player.getIdPlayer());
+				listener.sendData(new MyEvent(MenuPanel.this, c
+						.convertirAString()));
+
+				intoRoom(true);
 				
 			}
 		});
@@ -246,10 +257,10 @@ public class MenuPanel extends ImagePanel {
 	}
 
 	public void outRoom() {
-		goToStore.setEnabled(true);
-		goToProfile.setEnabled(true);
-		goToLobby.setEnabled(true);
-		createRoom.setEnabled(true);
+		goToStore.setEnabled(true);goToStore.setVisible(true);
+		goToProfile.setEnabled(true);goToProfile.setVisible(true);
+		goToLobby.setEnabled(true);goToLobby.setVisible(true);
+		createRoom.setEnabled(true);createRoom.setVisible(true);
 		leaveRoom.setVisible(false);
 		leaveRoom.setEnabled(false);
 		deleteRoom.setEnabled(false);
@@ -258,22 +269,22 @@ public class MenuPanel extends ImagePanel {
 	}
 
 	public void intoRoom(boolean creator) {
-		goToStore.setEnabled(false);
-		goToProfile.setEnabled(false);
-		goToLobby.setEnabled(false);
-		createRoom.setEnabled(false);
+		goToStore.setEnabled(false);goToStore.setVisible(false);
+		goToProfile.setEnabled(false);goToProfile.setVisible(false);
+		goToLobby.setEnabled(false);goToLobby.setVisible(false);
+		createRoom.setEnabled(false);createRoom.setVisible(false);
 		if (creator) {
-			leaveRoom.setEnabled(false);
-			leaveRoom.setVisible(false);
-			deleteRoom.setVisible(true);
-			deleteRoom.setEnabled(true);
+			
+			leaveRoom.setEnabled(false);leaveRoom.setVisible(false);
+			deleteRoom.setEnabled(true);deleteRoom.setVisible(true);
 			agentRoom.setVisible(false);
+			
 		} else {
-			leaveRoom.setEnabled(true);
-			leaveRoom.setVisible(true);
-			deleteRoom.setVisible(false);
-			deleteRoom.setEnabled(false);
+			
+			leaveRoom.setEnabled(true);leaveRoom.setVisible(true);
+			deleteRoom.setVisible(false);deleteRoom.setEnabled(false);
 			agentRoom.setVisible(false);
+			
 		}
 	}
 }
