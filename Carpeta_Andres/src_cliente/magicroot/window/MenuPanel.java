@@ -207,7 +207,7 @@ public class MenuPanel extends ImagePanel {
 	public EventListener[] getMenuPanelListeners() {
 		return evtMenuPanelListenerList.getListeners(MyListener.class);
 	}
-
+   
 	protected void fireMultiPanelEvent(MyEvent evt, int action) {
 		EventListener[] eventListeners = getMenuPanelListeners();
 
