@@ -267,9 +267,8 @@ public class MenuPanel extends ImagePanel {
 		goToProfile.setEnabled(true);goToProfile.setVisible(true);
 		goToLobby.setEnabled(true);goToLobby.setVisible(true);
 		createRoom.setEnabled(true);createRoom.setVisible(true);
-		leaveRoom.setVisible(false);
-		leaveRoom.setEnabled(false);
-		deleteRoom.setEnabled(false);
+		leaveRoom.setEnabled(false);leaveRoom.setVisible(false);
+		deleteRoom.setEnabled(false);deleteRoom.setVisible(false);
 		agentRoom.setVisible(true);
 
 	}

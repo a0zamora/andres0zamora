@@ -273,6 +273,7 @@ public class ProfilePanel extends ImagePanel {
 		int fuerzaAUX = 0 ;
 		int fuerza=list.get(0).getTop()+list.get(0).getDown()+list.get(0).getRight()+list.get(0).getLeft();
 		String id = list.get(0).getId();
+		sucksCardImage = new PlayCard(list.get(0));
 		for(int i = 1 ; i< list.size() ; i++){
 			fuerzaAUX = list.get(i).getTop()+list.get(i).getDown()+list.get(i).getRight()+list.get(i).getLeft();
 			if(fuerza > fuerzaAUX){
@@ -292,6 +293,7 @@ public class ProfilePanel extends ImagePanel {
 		fuerzaAUX = 0 ;
 		fuerza=list.get(0).getTop()+list.get(0).getDown()+list.get(0).getRight()+list.get(0).getLeft();
 		id = list.get(0).getId();
+		betterCardImage = new PlayCard(list.get(0));
 		for(int i = 1 ; i< list.size() ; i++){
 			fuerzaAUX = list.get(i).getTop()+list.get(i).getDown()+list.get(i).getRight()+list.get(i).getLeft();
 			if(fuerza < fuerzaAUX){
