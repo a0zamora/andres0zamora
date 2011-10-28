@@ -51,6 +51,7 @@ public class MenuPanel extends ImagePanel {
 						"mostrar_partidas"));
 			}
 		});
+		goToLobby.setToolTipText("Ver Partidas");
 		add(goToLobby);
 
 		goToStore = new MyButton("", 0, "buttons/tienda1.jpg",
@@ -67,6 +68,7 @@ public class MenuPanel extends ImagePanel {
 
 			}
 		});
+		goToStore.setToolTipText("Compra / Oferta / Trueque de cartas");
 		add(goToStore);
 
 		goToProfile = new MyButton("", 0, "buttons/perfil1.jpg",
@@ -82,6 +84,7 @@ public class MenuPanel extends ImagePanel {
 						.getUsername()), MyListener.SHOW_PROFILE);
 			}
 		});
+		goToProfile.setToolTipText("Ver Perfil");
 		add(goToProfile);
 
 		createRoom = new MyButton("", 0, "buttons/crear1.jpg",
@@ -107,6 +110,7 @@ public class MenuPanel extends ImagePanel {
 
 			}
 		});
+		createRoom.setToolTipText("Crear una partida para jugar con otro usuario");
 		add(createRoom);
 
 		deleteRoom = new MyButton("", 0, "buttons/borrar1.jpg",
@@ -137,6 +141,7 @@ public class MenuPanel extends ImagePanel {
 		});
 		deleteRoom.setEnabled(false);
 		deleteRoom.setVisible(false);
+		deleteRoom.setToolTipText("Borrar Partida");
 		add(deleteRoom);
 
 		leaveRoom = new MyButton("", 0, "buttons/desertar1.jpg",
@@ -167,6 +172,7 @@ public class MenuPanel extends ImagePanel {
 		});
 		leaveRoom.setEnabled(false);
 		leaveRoom.setVisible(false);
+		leaveRoom.setToolTipText("Salir de la Partida");
 		add(leaveRoom);
 		
 		agentRoom = new MyButton("", 0, "buttons/agente.jpg",

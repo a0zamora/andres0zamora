@@ -198,7 +198,8 @@ public class StorePanel extends ImagePanel {
 		
 		if(card !=null)
 			remove(card);
-		
+		cardSelected.setRdyIcon(false);
+		cardSelected.initBufferedImage();
 		card= new PlayCard(cardSelected);
 		card.setCost(cardSelected.getCost());
 		idCarta = Integer.parseInt(card.getId());

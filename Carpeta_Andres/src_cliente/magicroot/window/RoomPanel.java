@@ -80,10 +80,12 @@ public class RoomPanel extends ImagePanel {
 			startButton = new MyButton("", 0, "buttons/empezar1.jpg",
 					"buttons/empezar2.jpg", "buttons/empezar3.jpg",
 					"buttons/empezar4.jpg");
+			startButton.setToolTipText("Empezar Partida");
 		} else {
 			startButton = new MyButton("", 0, "buttons/listo1.jpg",
 					"buttons/listo2.jpg", "buttons/listo3.jpg",
 					"buttons/listo4.jpg");
+			startButton.setToolTipText("Ya elegí mis Cartas");
 
 		}
 		startButton.setBounds((int) (wid * 0.8), (int) (hei * 0.88),
@@ -133,6 +135,7 @@ public class RoomPanel extends ImagePanel {
 					disableKick();
 				}
 			});
+			kickButton.setToolTipText("Expulsar Usuario Conectado a la Partida");
 			add(kickButton);
 			kickButton.setEnabled(false);
 		}
