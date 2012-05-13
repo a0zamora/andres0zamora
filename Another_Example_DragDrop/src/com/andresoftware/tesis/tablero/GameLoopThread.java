@@ -1,14 +1,14 @@
-package com.examples.dragdrop;
+package com.andresoftware.tesis.tablero;
 
 import android.graphics.Canvas;
 
 
 public class GameLoopThread extends Thread{
 	 static final long FPS = 10;
-     private DrawView view;
+     private MagicRootTable view;
      private boolean running = false;
     
-     public GameLoopThread(DrawView view) {
+     public GameLoopThread(MagicRootTable view) {
            this.view = view;
      }
 

@@ -1,4 +1,6 @@
-package com.examples.dragdrop;
+package com.andresoftware.tesis.tablero;
+
+import com.examples.dragdrop.R;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,7 +13,7 @@ public class Another_Example_DragDropActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // draw the view
-        setContentView(new DrawView(this, getBaseContext(), this));
+        setContentView(new MagicRootTable(this, getBaseContext(), this));
     }
     public void changeView() {
 		setContentView(R.layout.main);
