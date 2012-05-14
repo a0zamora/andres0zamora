@@ -20,7 +20,7 @@ public class MagicRootActivity extends Activity {
 		ChatView.initChat(this);
 	}
     public void chageViewToGamerRoom() {          
-    	setContentView(new MagicRootGame(this, getBaseContext(), this));
+    	setContentView(new MagicRootGame(this, getBaseContext(), this));          
 	}
     public void changeViewToMenu() {
     	MenuView.initMenu(this);          
