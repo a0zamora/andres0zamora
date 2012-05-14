@@ -31,7 +31,8 @@ public class PlayCard {
 		//		BitmapFactory.Options opts = new BitmapFactory.Options();
 		//		opts.inJustDecodeBounds = true;
 		img = BitmapFactory.decodeResource(context.getResources(), drawable); 
-		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.earthicon); 
+		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.fireicon); 
+//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.earthicon); 
 //		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.watericon); 
 //		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.windicon); 
 		northPower = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
