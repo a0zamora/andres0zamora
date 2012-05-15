@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" >
-
+
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="350dp"
@@ -14,57 +14,72 @@
         android:id="@+id/ScrollView01"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
-
+
         <LinearLayout
             android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
-
+            android:orientation="vertical">
+
             <Button
                 android:id="@+id/button1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Gamer Room" />
+                android:layout_height="42dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/blue"
+                android:text="Play Now" />
+
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Gamer Room" />
+                android:layout_height="42dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/blue"
+                android:text="Buy Cards" />
+
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Gamer Room" />
+                android:layout_height="42dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/blue"
+                android:text="Sell Cards" />
+
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Gamer Room" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Gamer Room" />
-
+                android:layout_height="42dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/blue"
+                android:text="Test Room" />
+
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/blue"
                 android:text="Create a Game" />
-
+
             <Button
                 android:id="@+id/button3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/blue"
                 android:text="Profile" />
-
+
             <Button
                 android:id="@+id/button4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/blue"
                 android:text="Chat" />
-
+
             <Button
                 android:id="@+id/button5"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/blue"
                 android:text="Exit" />
 
             <LinearLayout

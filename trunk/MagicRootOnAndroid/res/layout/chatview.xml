@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/blue"
+    android:gravity="center|left"
     android:orientation="vertical" >
 
     <ScrollView
@@ -12,6 +14,8 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:background="@drawable/blue"
+            android:gravity="center"
             android:orientation="vertical" >
 
             <ScrollView
@@ -24,16 +28,23 @@
                     android:id="@+id/editText1"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine">
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:inputType="textMultiLine" >
 
                 </EditText>
             </ScrollView>
-
+
             <EditText
                 android:id="@+id/editText2"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
                 android:inputType="textMultiLine" >
 
                 <requestFocus />
@@ -41,15 +52,18 @@
 
             <Button
                 android:id="@+id/button1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="Enviar" />
+                android:layout_width="139dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:text="Send Text"
+                android:textSize="30dp" />
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Exit" />
+                android:layout_width="139dp"
+                android:layout_height="50dp"
+                android:text="Exit"
+                android:textSize="30dp" />
         </LinearLayout>
     </ScrollView>
 
