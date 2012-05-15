@@ -19,10 +19,10 @@ public class MagicRootActivity extends Activity {
     public void changeViewToChat() {
 		ChatView.initChat(this);
 	}
-    public void chageViewToGamerRoom() {          
-    	setContentView(new MagicRootGame(this, getBaseContext(), this));          
-	}
     public void changeViewToMenu() {
     	MenuView.initMenu(this);          
+	}
+    public void chageViewToGamerRoom() {                           
+    	setContentView(new MagicRootGame(this, getBaseContext(), this));             
 	}
 }
