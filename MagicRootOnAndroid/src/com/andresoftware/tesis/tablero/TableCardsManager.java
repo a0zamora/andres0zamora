@@ -10,7 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 
 public class TableCardsManager {
-	private TableCard[] tableCards = new TableCard[16];
+	private List<PlayCard> tableCards = new ArrayList<PlayCard>();
 	private Context context;
 
 	//----------------------------------------------------------------------------------
@@ -66,46 +66,56 @@ public class TableCardsManager {
 		point16.x = xAux+(3*69);
 		point16.y = 295;
 		// declare each card with the color
-		tableCards[0] = new TableCard(context,R.drawable.yellowcard, point1);
-		tableCards[1] = new TableCard(context,R.drawable.yellowcard, point2);
-		tableCards[2] = new TableCard(context,R.drawable.yellowcard, point3);
-		tableCards[3] = new TableCard(context,R.drawable.yellowcard, point4);
-		tableCards[4] = new TableCard(context,R.drawable.yellowcard, point5);
-		tableCards[5] = new TableCard(context,R.drawable.yellowcard, point6);
-		tableCards[6] = new TableCard(context,R.drawable.yellowcard, point7);
-		tableCards[7] = new TableCard(context,R.drawable.yellowcard, point8);
-		tableCards[8] = new TableCard(context,R.drawable.yellowcard, point9);
-		tableCards[9] = new TableCard(context,R.drawable.yellowcard, point10);
-		tableCards[10] = new TableCard(context,R.drawable.yellowcard, point11);
-		tableCards[11] = new TableCard(context,R.drawable.yellowcard, point12);
-		tableCards[12] = new TableCard(context,R.drawable.yellowcard, point13);
-		tableCards[13] = new TableCard(context,R.drawable.yellowcard, point14);
-		tableCards[14] = new TableCard(context,R.drawable.yellowcard, point15);
-		tableCards[15] = new TableCard(context,R.drawable.yellowcard, point16);
+		PlayCard tableCards0 = new PlayCard(context,R.drawable.yellowcard, point1);
+		PlayCard tableCards1 = new PlayCard(context,R.drawable.yellowcard, point2);
+		PlayCard tableCards2 = new PlayCard(context,R.drawable.yellowcard, point3);
+		PlayCard tableCards3 = new PlayCard(context,R.drawable.yellowcard, point4);
+		PlayCard tableCards4 = new PlayCard(context,R.drawable.yellowcard, point5);
+		PlayCard tableCards5 = new PlayCard(context,R.drawable.yellowcard, point6);
+		PlayCard tableCards6 = new PlayCard(context,R.drawable.yellowcard, point7);
+		PlayCard tableCards7 = new PlayCard(context,R.drawable.yellowcard, point8);
+		PlayCard tableCards8 = new PlayCard(context,R.drawable.yellowcard, point9);
+		PlayCard tableCards9 = new PlayCard(context,R.drawable.yellowcard, point10);
+		PlayCard tableCards10 = new PlayCard(context,R.drawable.yellowcard, point11);
+		PlayCard tableCards11 = new PlayCard(context,R.drawable.yellowcard, point12);
+		PlayCard tableCards12 = new PlayCard(context,R.drawable.yellowcard, point13);
+		PlayCard tableCards13 = new PlayCard(context,R.drawable.yellowcard, point14);
+		PlayCard tableCards14 = new PlayCard(context,R.drawable.yellowcard, point15);
+		PlayCard tableCards15 = new PlayCard(context,R.drawable.yellowcard, point16);		
+		tableCards.add(tableCards0);
+		tableCards.add(tableCards1);
+		tableCards.add(tableCards2);
+		tableCards.add(tableCards3);
+		tableCards.add(tableCards4);
+		tableCards.add(tableCards5);
+		tableCards.add(tableCards6);
+		tableCards.add(tableCards7);
+		tableCards.add(tableCards8);
+		tableCards.add(tableCards9);
+		tableCards.add(tableCards10);
+		tableCards.add(tableCards11);
+		tableCards.add(tableCards12);
+		tableCards.add(tableCards13);
+		tableCards.add(tableCards14);
+		tableCards.add(tableCards15);
 		initIds();
-	}
-	//----------------------------------------------------------------------------------
-	public TableCard[] getTableCards() {
-		return tableCards;
-	}
-	//----------------------------------------------------------------------------------
-	public void setTableCards(TableCard[] tableCards) {
-		this.tableCards = tableCards;
+		initTableCards();
 	}
 	//----------------------------------------------------------------------------------
 	public void drawCards(Canvas canvas) {
-		for (TableCard card : tableCards) {
-			if(card.isEnable()){
-				card.drawBall(canvas);	
+		for (PlayCard card : tableCards) {
+			if(card.isDraw()){
+				card.drawCard(canvas);	
 			}
 			
 		}
 	}
 	//----------------------------------------------------------------------------------
-		public int getId(int x, int y) {
+		public PlayCard getCard(int x, int y) {
 			
-			int returnId=-1;
-			for (TableCard tableCard : tableCards) {
+			PlayCard returnCard=null;
+			int i=0;
+			for (PlayCard tableCard : tableCards) {
 				if(tableCard.isEnable()){
 					// check if inside the bounds of the card 
 					// get the center for the card
@@ -123,33 +133,31 @@ public class TableCardsManager {
 					}
 					//  then it must be on the card
 					if (radCardX <= 32 && radCardY <= 42){
-						returnId = tableCard.getId();
-						tableCard.setEnable(false);
+						returnCard = tableCard;
+						tableCard.setDraw(false);
 						break;
 					}
 				}
+				i++;
 			}
-			return returnId;
+			return returnCard;
 		}
 		//----------------------------------------------------------------------------------
 		public void initIds() {
 			int id=0;
-			for(TableCard card: tableCards){
+			for(PlayCard card: tableCards){
 				card.setId(id);
 				id++;
 			}
 		}
 		//----------------------------------------------------------------------------------
-		public int getCoorX(int id) {
-			return tableCards[id].getX();
+		public void setCard(PlayCard card) {
+			tableCards.add(card);
 		}
 		//----------------------------------------------------------------------------------
-		public int getCoorY(int id) {
-			return tableCards[id].getY();
+		public void initTableCards() {
+			for(PlayCard card:tableCards){
+				card.setTableCard(true);
+			}
 		}
-		//----------------------------------------------------------------------------------
-		public void setUnableCardTable(int id) {
-			tableCards[id].setEnable(false);
-		}
-		//----------------------------------------------------------------------------------
 }

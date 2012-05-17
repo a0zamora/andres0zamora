@@ -53,7 +53,7 @@ public class OpponentCardsManager {
 	//----------------------------------------------------------------------------------
 	public void drawCards(Canvas canvas) {
 		for (PlayCard ball : opponentCards) {
-				ball.drawBall(canvas);
+				ball.drawCard(canvas);
 				
 			
 		}

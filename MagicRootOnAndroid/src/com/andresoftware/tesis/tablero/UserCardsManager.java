@@ -1,5 +1,8 @@
 package com.andresoftware.tesis.tablero;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.andresoftware.tesis.gen.R;
 
 import android.content.Context;
@@ -8,7 +11,7 @@ import android.graphics.Point;
 
 public class UserCardsManager {
 	private Context context;
-	private PlayCard[] userCards = new PlayCard[8]; // array that holds the cards
+	private List<PlayCard> userCards = new ArrayList<PlayCard>();
 	//----------------------------------------------------------------------------------
 	public UserCardsManager(Context context) {
 		this.context=context;
@@ -37,30 +40,37 @@ public class UserCardsManager {
 		point8.x = 74;
 		point8.y = 295;
 		// declare each card with the color
-		userCards[0] = new PlayCard(context,R.drawable.yellowcard, point1);
-		userCards[1] = new PlayCard(context,R.drawable.yellowcard, point2);
-		userCards[2] = new PlayCard(context,R.drawable.yellowcard, point3);
-		userCards[3] = new PlayCard(context,R.drawable.yellowcard, point4);
-		userCards[4] = new PlayCard(context,R.drawable.yellowcard, point5);
-		userCards[5] = new PlayCard(context,R.drawable.yellowcard, point6);
-		userCards[6] = new PlayCard(context,R.drawable.yellowcard, point7);
-		userCards[7] = new PlayCard(context,R.drawable.yellowcard, point8);
+		PlayCard userCards0 = new PlayCard(context,R.drawable.yellowcard, point1);
+		PlayCard userCards1 = new PlayCard(context,R.drawable.yellowcard, point2);
+		PlayCard userCards2 = new PlayCard(context,R.drawable.yellowcard, point3);
+		PlayCard userCards3 = new PlayCard(context,R.drawable.yellowcard, point4);
+		PlayCard userCards4 = new PlayCard(context,R.drawable.yellowcard, point5);
+		PlayCard userCards5 = new PlayCard(context,R.drawable.yellowcard, point6);
+		PlayCard userCards6 = new PlayCard(context,R.drawable.yellowcard, point7);
+		PlayCard userCards7 = new PlayCard(context,R.drawable.yellowcard, point8);
+		userCards.add(userCards0);
+		userCards.add(userCards1);
+		userCards.add(userCards2);
+		userCards.add(userCards3);
+		userCards.add(userCards4);
+		userCards.add(userCards5);
+		userCards.add(userCards6);
+		userCards.add(userCards7);
 		initIds();
-		
 	}
 	//----------------------------------------------------------------------------------
-	public void drawCards(Canvas canvas, int cardID) {
-		for (PlayCard ball : userCards) {
-			if(ball.getID()!=cardID){
-				ball.drawBall(canvas);
-				
+	public void drawCards(Canvas canvas) {
+		for (PlayCard card : userCards) {
+			if(card.isEnable()){
+				card.drawCard(canvas);
 			}
 		}
 	}
 	//----------------------------------------------------------------------------------
-	public int getId(int x, int y) {
-		
-		int returnId=10;
+	public PlayCard getId(int x, int y) {
+
+		PlayCard cardReturn = null;
+		int i=0;
 		for (PlayCard card : userCards) {
 			if (card.isEnable()){
 				// check if inside the bounds of the card
@@ -79,12 +89,45 @@ public class UserCardsManager {
 				}
 				// then it must be on the card
 				if (radCardX <= 32 && radCardY <= 42){
-					returnId = card.getID();
+//					cardReturn = userCards.remove(i);
+					cardReturn = card;
 					break;
 				}
 			}
+			i++;
 		}
-		return returnId;
+		return cardReturn;
+	}
+	//----------------------------------------------------------------------------------
+	public PlayCard getCard(int x, int y) {
+
+		PlayCard cardReturn = null;
+		int i=0;
+		for (PlayCard card : userCards) {
+			if (card.isEnable()){
+				// check if inside the bounds of the card
+				// get the center for the ball
+				int centerX = card.getX() + 32;
+				int centerY = card.getY() + 42;
+
+				// calculate the radius from the touch to the center of the card
+				int radCardX  = (centerX-x);
+				int radCardY  = (centerY-y);
+				if(radCardX<0){
+					radCardX = radCardX*(-1);
+				}
+				if(radCardY<0){
+					radCardY = radCardY*(-1);
+				}
+				// then it must be on the card
+				if (radCardX <= 32 && radCardY <= 42){
+					cardReturn = card;
+					break;
+				}
+			}
+			i++;
+		}
+		return cardReturn;
 	}
 	//----------------------------------------------------------------------------------
 	public void initIds() {
@@ -95,13 +138,7 @@ public class UserCardsManager {
 		}
 	}
 	//----------------------------------------------------------------------------------
-	public PlayCard getCard(int id) {
-		return userCards[id];
+	public void setCard(PlayCard card) {
+		userCards.add(card);
 	}
-	//----------------------------------------------------------------------------------
-	public void moveCard(int id, int x, int y) {
-		userCards[id].setX(x);
-		userCards[id].setY(y);
-	}
-	//----------------------------------------------------------------------------------
 }

@@ -25,6 +25,8 @@ public class PlayCard {
 	private Thread thread;
 	Context context=null;
 	private boolean enable = true;
+	private boolean draw = true;
+	private boolean tableCard = false;
 	//----------------------------------------------------------------------------------
 	public PlayCard(Context context, int drawable, Point point) {
 		this.context= context;
@@ -51,14 +53,16 @@ public class PlayCard {
 
 	}
 	//----------------------------------------------------------------------------------
-		public void drawBall(Canvas canvas) {
+		public void drawCard(Canvas canvas) {
 
 			canvas.drawBitmap(this.getBitmap(), this.getX(), this.getY(), null);
-			canvas.drawBitmap(this.getBitmapCenter(), this.getX()+19, this.getY()+29, null);
-			canvas.drawBitmap(this.getBitmapNorth(), this.getX()+24, this.getY()+5, null);
-			canvas.drawBitmap(this.getBitmapSouth(), this.getX()+24, this.getY()+65, null);
-			canvas.drawBitmap(this.getBitmapEast(), this.getX()+2, this.getY()+35, null);
-			canvas.drawBitmap(this.getBitmapWest(), this.getX()+43, this.getY()+35, null);
+			if(!tableCard){
+				canvas.drawBitmap(this.getBitmapCenter(), this.getX()+19, this.getY()+29, null);
+				canvas.drawBitmap(this.getBitmapNorth(), this.getX()+24, this.getY()+5, null);
+				canvas.drawBitmap(this.getBitmapSouth(), this.getX()+24, this.getY()+65, null);
+				canvas.drawBitmap(this.getBitmapEast(), this.getX()+2, this.getY()+35, null);
+				canvas.drawBitmap(this.getBitmapWest(), this.getX()+43, this.getY()+35, null);
+			}
 		}
 	//----------------------------------------------------------------------------------
 	public static int getCount() {
@@ -138,6 +142,14 @@ public class PlayCard {
 	}
 	
 	//----------------------------------------------------------------------------------
+	public boolean isTableCard() {
+		return tableCard;
+	}
+	//----------------------------------------------------------------------------------
+	public void setTableCard(boolean tableCard) {
+		this.tableCard = tableCard;
+	}
+	//----------------------------------------------------------------------------------
 	public void flipCard(){
 
 		Runnable runnable = new Runnable() {
@@ -176,5 +188,11 @@ public class PlayCard {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public boolean isDraw() {
+		return draw;
+	}
+	public void setDraw(boolean draw) {
+		this.draw = draw;
 	}
 }
