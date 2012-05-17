@@ -16,7 +16,7 @@ public static void initMenu(final MagicRootActivity main) {
 		
 		@Override
 		public void onClick(View v) {
-			main.chageViewToGamerRoom();
+			main.changeViewToGamerRoom();
 		}
 	});
 	Button buttonChat = (Button) main.findViewById(R.id.button4);

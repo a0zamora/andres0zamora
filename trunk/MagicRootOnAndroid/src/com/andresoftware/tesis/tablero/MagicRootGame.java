@@ -2,6 +2,9 @@ package com.andresoftware.tesis.tablero;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.andresoftware.tesis.gen.R;
 import com.andresoftware.tesis.mainactivity.MagicRootActivity;
 
@@ -19,7 +22,7 @@ public class MagicRootGame extends SurfaceView {
 	private UserCardsManager userCards;
 	private TableCardsManager tableGame;
 	private Bitmap fondo; //private Bitmap table;
-	private int balID = 10; // variable to know what ball is being dragged
+	private List<PlayCard> movingCard = new ArrayList<PlayCard>(); // variable to know what card is moving
 	private MagicRootActivity context;
 	private SurfaceHolder holder;	// Necessary for animations
 	private GameLoopThread gameLoopThread;	// Necessary for animations
@@ -69,12 +72,12 @@ public class MagicRootGame extends SurfaceView {
 		canvas.drawBitmap(fondo, 0, 0, null);
 		tableGame.drawCards(canvas);
 		//draw the user cards on the canvas
-		userCards.drawCards(canvas, balID);
+		userCards.drawCards(canvas);
 		//draw the opponent cards on the canvas
 		opponentCards.drawCards(canvas);
 		//this is for draw the card that is moving on the canvas
-		if(balID!=10){
-			userCards.getCard(balID).drawBall(canvas);
+		if(movingCard.size()!=0){
+			movingCard.get(0).drawCard(canvas);
 		}
 	}
 	//----------------------------------------------------------------------------------
@@ -90,24 +93,31 @@ public class MagicRootGame extends SurfaceView {
 		int Y = (int)event.getY(); 
 		switch (eventaction ) { 
 		case MotionEvent.ACTION_DOWN: // touch down so check if the finger is on a ball
-			balID=userCards.getId(X, Y);
+			if(userCards.getId(X, Y)!=null){
+				movingCard.add(userCards.getCard(X, Y));
+				movingCard.get(0).setEnable(false);
+			}            
 			break; 
 		case MotionEvent.ACTION_MOVE:   // touch drag with the ball
 			// move the card the same as the finger
-			if (balID != 10) {
-				userCards.moveCard(balID, X-32, Y-42);
+			if (movingCard.size() != 0) {
+				movingCard.get(0).setX(X-32);
+				movingCard.get(0).setY(Y-42);
 			}
 			break; 
 		case MotionEvent.ACTION_UP: 
-			if (balID != 10) {
-				int idAux=tableGame.getId(X, Y);
-				if(idAux!=-1){
-					userCards.moveCard(balID, tableGame.getCoorX(idAux),tableGame.getCoorY(idAux));
-					userCards.getCard(balID).setEnable(false);
+			if (movingCard.size() != 0) {
+				PlayCard auxCard= tableGame.getCard(X, Y);
+				if(auxCard!=null){
+					movingCard.get(0).setX(auxCard.getX());
+					movingCard.get(0).setY(auxCard.getY());
+					movingCard.get(0).setEnable(false);
+					tableGame.setCard(movingCard.remove(0));
 				}else{
-					userCards.moveCard(balID, 
-							userCards.getCard(balID).getInitialPosX(), 
-							userCards.getCard(balID).getInitialPosY());
+					movingCard.get(0).setX(movingCard.get(0).getInitialPosX());
+					movingCard.get(0).setY(movingCard.get(0).getInitialPosY());
+					movingCard.get(0).setEnable(true);
+					userCards.setCard(movingCard.remove(0));
 				}
 			}
 			break; 
