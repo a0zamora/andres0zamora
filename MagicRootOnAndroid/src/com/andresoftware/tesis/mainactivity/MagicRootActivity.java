@@ -32,7 +32,7 @@ public class MagicRootActivity extends Activity {
 		changeViewToMenu();
 //		finish();
 //        System.exit(0);
-	}              
+	}                                   
 	@Override
 	protected void onResume() {
 		changeViewToMenu();

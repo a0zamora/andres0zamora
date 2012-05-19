@@ -22,7 +22,7 @@ public class MagicRootGame extends SurfaceView {
 	private UserCardsManager userCards;
 	private TableCardsManager tableGame;
 	private Bitmap fondo; //private Bitmap table;
-	private List<PlayCard> movingCard = new ArrayList<PlayCard>(); // variable to know what card is moving
+	private PlayCard movingCard = null; // variable to know what card is moving
 	private MagicRootActivity context;
 	private SurfaceHolder holder;	// Necessary for animations
 	private GameLoopThread gameLoopThread;	// Necessary for animations
@@ -76,8 +76,8 @@ public class MagicRootGame extends SurfaceView {
 		//draw the opponent cards on the canvas
 		opponentCards.drawCards(canvas);
 		//this is for draw the card that is moving on the canvas
-		if(movingCard.size()!=0){
-			movingCard.get(0).drawCard(canvas);
+		if(movingCard!=null){
+			movingCard.drawCard(canvas);
 		}
 	}
 	//----------------------------------------------------------------------------------
@@ -94,30 +94,32 @@ public class MagicRootGame extends SurfaceView {
 		switch (eventaction ) { 
 		case MotionEvent.ACTION_DOWN: // touch down so check if the finger is on a ball
 			if(userCards.getId(X, Y)!=null){
-				movingCard.add(userCards.getCard(X, Y));
-				movingCard.get(0).setEnable(false);
+				movingCard=userCards.getCard(X, Y).clone();
+				userCards.setCardNull(X, Y);
 			}            
 			break; 
 		case MotionEvent.ACTION_MOVE:   // touch drag with the ball
 			// move the card the same as the finger
-			if (movingCard.size() != 0) {
-				movingCard.get(0).setX(X-32);
-				movingCard.get(0).setY(Y-42);
+			if (movingCard!=null) {
+				movingCard.setX(X-32);
+				movingCard.setY(Y-42);
 			}
 			break; 
 		case MotionEvent.ACTION_UP: 
-			if (movingCard.size() != 0) {
-				PlayCard auxCard= tableGame.getCard(X, Y);
+			if (movingCard != null) {
+				PlayCard auxCard = tableGame.getCard(X, Y);
 				if(auxCard!=null){
-					movingCard.get(0).setX(auxCard.getX());
-					movingCard.get(0).setY(auxCard.getY());
-					movingCard.get(0).setEnable(false);
-					tableGame.setCard(movingCard.remove(0));
+					movingCard.setX(auxCard.getX());
+					movingCard.setY(auxCard.getY());
+					movingCard.setEnable(false);
+					tableGame.setCard(X, Y, movingCard.clone());
+					movingCard=null;
 				}else{
-					movingCard.get(0).setX(movingCard.get(0).getInitialPosX());
-					movingCard.get(0).setY(movingCard.get(0).getInitialPosY());
-					movingCard.get(0).setEnable(true);
-					userCards.setCard(movingCard.remove(0));
+					movingCard.setX(movingCard.getInitialPosX());
+					movingCard.setY(movingCard.getInitialPosY());
+					movingCard.setEnable(true);
+					userCards.setCard(movingCard.clone());
+					movingCard=null;
 				}
 			}
 			break; 
