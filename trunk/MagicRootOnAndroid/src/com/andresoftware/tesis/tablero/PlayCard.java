@@ -21,29 +21,24 @@ public class PlayCard {
 	private int coordX = 0; // the x coordinate at the canvas
 	private int coordY = 0; // the y coordinate at the canvas
 	private int id; // gives every ball his own id, for now not necessary
-	private static int count = 1;
 	private Thread thread;
 	Context context=null;
 	private boolean enable = true;
-	private boolean draw = true;
 	private boolean tableCard = false;
 	//----------------------------------------------------------------------------------
 	public PlayCard(Context context, int drawable, Point point) {
 		this.context= context;
-		//		BitmapFactory.Options opts = new BitmapFactory.Options();
-		//		opts.inJustDecodeBounds = true;
+//		BitmapFactory.Options opts = new BitmapFactory.Options();
+//		opts.inJustDecodeBounds = true;
 		img = BitmapFactory.decodeResource(context.getResources(), drawable); 
 		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.fireicon); 
-//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.earthicon); 
-//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.watericon); 
-//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.windicon); 
+		//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.earthicon); 
+		//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.watericon); 
+		//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.windicon); 
 		northPower = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
 		southPower = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
 		eastPower = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
 		westPower = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
-
-		id=count;
-		count++;
 		initialPosX = point.x;
 		initialPosY = point.y;
 		coordX= point.x;
@@ -53,20 +48,48 @@ public class PlayCard {
 
 	}
 	//----------------------------------------------------------------------------------
-		public void drawCard(Canvas canvas) {
-
-			canvas.drawBitmap(this.getBitmap(), this.getX(), this.getY(), null);
-			if(!tableCard){
-				canvas.drawBitmap(this.getBitmapCenter(), this.getX()+19, this.getY()+29, null);
-				canvas.drawBitmap(this.getBitmapNorth(), this.getX()+24, this.getY()+5, null);
-				canvas.drawBitmap(this.getBitmapSouth(), this.getX()+24, this.getY()+65, null);
-				canvas.drawBitmap(this.getBitmapEast(), this.getX()+2, this.getY()+35, null);
-				canvas.drawBitmap(this.getBitmapWest(), this.getX()+43, this.getY()+35, null);
-			}
-		}
+	public PlayCard() {
+		// TODO Auto-generated constructor stub
+	}
 	//----------------------------------------------------------------------------------
-	public static int getCount() {
-		return count;
+	public void drawCard(Canvas canvas) {
+
+		canvas.drawBitmap(this.getBitmap(), this.getX(), this.getY(), null);
+		if(!tableCard){
+			canvas.drawBitmap(this.getBitmapCenter(), this.getX()+19, this.getY()+29, null);
+			canvas.drawBitmap(this.getBitmapNorth(), this.getX()+24, this.getY()+5, null);
+			canvas.drawBitmap(this.getBitmapSouth(), this.getX()+24, this.getY()+65, null);
+			canvas.drawBitmap(this.getBitmapEast(), this.getX()+2, this.getY()+35, null);
+			canvas.drawBitmap(this.getBitmapWest(), this.getX()+43, this.getY()+35, null);
+		}
+	}
+	//----------------------------------------------------------------------------------
+	public void setContext(Context context) {
+		this.context = context;
+	}
+	//----------------------------------------------------------------------------------
+	public void setImg(Bitmap img) {
+		this.img = img;
+	}
+	//----------------------------------------------------------------------------------
+	public void setCenter(Bitmap center) {
+		this.center = center;
+	}
+	//----------------------------------------------------------------------------------
+	public void setNorthPower(Bitmap northPower) {
+		this.northPower = northPower;
+	}
+	//----------------------------------------------------------------------------------
+	public void setSouthPower(Bitmap southPower) {
+		this.southPower = southPower;
+	}
+	//----------------------------------------------------------------------------------
+	public void setEastPower(Bitmap eastPower) {
+		this.eastPower = eastPower;
+	}
+	//----------------------------------------------------------------------------------
+	public void setWestPower(Bitmap westPower) {
+		this.westPower = westPower;
 	}
 	//----------------------------------------------------------------------------------
 	void setX(int newValue) {
@@ -140,7 +163,7 @@ public class PlayCard {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
-	
+
 	//----------------------------------------------------------------------------------
 	public boolean isTableCard() {
 		return tableCard;
@@ -189,10 +212,22 @@ public class PlayCard {
 			e.printStackTrace();
 		}
 	}
-	public boolean isDraw() {
-		return draw;
-	}
-	public void setDraw(boolean draw) {
-		this.draw = draw;
+	//----------------------------------------------------------------------------------
+	public PlayCard clone() {
+		PlayCard card = new PlayCard();
+		card.setId(id);
+		card.setInitialPosX(initialPosX);
+		card.setInitialPosY(initialPosY);
+		card.setX(coordX);
+		card.setY(coordY);
+		card.setEnable(enable);
+		card.setCenter(center);
+		card.setNorthPower(northPower);
+		card.setSouthPower(southPower);
+		card.setEastPower(eastPower);
+		card.setWestPower(westPower);
+		card.setImg(img);
+		card.setContext(context);
+		return card;
 	}
 }

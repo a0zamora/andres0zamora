@@ -11,7 +11,7 @@ import android.graphics.Point;
 
 public class UserCardsManager {
 	private Context context;
-	private List<PlayCard> userCards = new ArrayList<PlayCard>();
+	private PlayCard[] userCards = new PlayCard[8];
 	//----------------------------------------------------------------------------------
 	public UserCardsManager(Context context) {
 		this.context=context;
@@ -40,28 +40,21 @@ public class UserCardsManager {
 		point8.x = 74;
 		point8.y = 295;
 		// declare each card with the color
-		PlayCard userCards0 = new PlayCard(context,R.drawable.yellowcard, point1);
-		PlayCard userCards1 = new PlayCard(context,R.drawable.yellowcard, point2);
-		PlayCard userCards2 = new PlayCard(context,R.drawable.yellowcard, point3);
-		PlayCard userCards3 = new PlayCard(context,R.drawable.yellowcard, point4);
-		PlayCard userCards4 = new PlayCard(context,R.drawable.yellowcard, point5);
-		PlayCard userCards5 = new PlayCard(context,R.drawable.yellowcard, point6);
-		PlayCard userCards6 = new PlayCard(context,R.drawable.yellowcard, point7);
-		PlayCard userCards7 = new PlayCard(context,R.drawable.yellowcard, point8);
-		userCards.add(userCards0);
-		userCards.add(userCards1);
-		userCards.add(userCards2);
-		userCards.add(userCards3);
-		userCards.add(userCards4);
-		userCards.add(userCards5);
-		userCards.add(userCards6);
-		userCards.add(userCards7);
+		userCards[0] = new PlayCard(context,R.drawable.yellowcard, point1);
+		userCards[1] = new PlayCard(context,R.drawable.yellowcard, point2);
+		userCards[2] = new PlayCard(context,R.drawable.yellowcard, point3);
+		userCards[3] = new PlayCard(context,R.drawable.yellowcard, point4);
+		userCards[4] = new PlayCard(context,R.drawable.yellowcard, point5);
+		userCards[5] = new PlayCard(context,R.drawable.yellowcard, point6);
+		userCards[6] = new PlayCard(context,R.drawable.yellowcard, point7);
+		userCards[7] = new PlayCard(context,R.drawable.yellowcard, point8);
+		
 		initIds();
 	}
 	//----------------------------------------------------------------------------------
 	public void drawCards(Canvas canvas) {
 		for (PlayCard card : userCards) {
-			if(card.isEnable()){
+			if(card!=null){
 				card.drawCard(canvas);
 			}
 		}
@@ -72,26 +65,29 @@ public class UserCardsManager {
 		PlayCard cardReturn = null;
 		int i=0;
 		for (PlayCard card : userCards) {
-			if (card.isEnable()){
-				// check if inside the bounds of the card
-				// get the center for the ball
-				int centerX = card.getX() + 32;
-				int centerY = card.getY() + 42;
+			if(card!=null){
 
-				// calculate the radius from the touch to the center of the card
-				int radCardX  = (centerX-x);
-				int radCardY  = (centerY-y);
-				if(radCardX<0){
-					radCardX = radCardX*(-1);
-				}
-				if(radCardY<0){
-					radCardY = radCardY*(-1);
-				}
-				// then it must be on the card
-				if (radCardX <= 32 && radCardY <= 42){
-//					cardReturn = userCards.remove(i);
-					cardReturn = card;
-					break;
+				if (card.isEnable()){
+					// check if inside the bounds of the card
+					// get the center for the ball
+					int centerX = card.getX() + 32;
+					int centerY = card.getY() + 42;
+
+					// calculate the radius from the touch to the center of the card
+					int radCardX  = (centerX-x);
+					int radCardY  = (centerY-y);
+					if(radCardX<0){
+						radCardX = radCardX*(-1);
+					}
+					if(radCardY<0){
+						radCardY = radCardY*(-1);
+					}
+					// then it must be on the card
+					if (radCardX <= 32 && radCardY <= 42){
+						//					cardReturn = userCards.remove(i);
+						cardReturn = card;
+						break;
+					}
 				}
 			}
 			i++;
@@ -102,32 +98,64 @@ public class UserCardsManager {
 	public PlayCard getCard(int x, int y) {
 
 		PlayCard cardReturn = null;
+		for (PlayCard card : userCards) {
+			if(card!=null){
+				if (card.isEnable()){
+					// check if inside the bounds of the card
+					// get the center for the ball
+					int centerX = card.getX() + 32;
+					int centerY = card.getY() + 42;
+
+					// calculate the radius from the touch to the center of the card
+					int radCardX  = (centerX-x);
+					int radCardY  = (centerY-y);
+					if(radCardX<0){
+						radCardX = radCardX*(-1);
+					}
+					if(radCardY<0){
+						radCardY = radCardY*(-1);
+					}
+					// then it must be on the card
+					if (radCardX <= 32 && radCardY <= 42){
+						cardReturn = card;
+						break;
+					}
+				}
+			}
+			
+		}
+		return cardReturn;
+	}
+	//----------------------------------------------------------------------------------
+	public void setCardNull(int x, int y) {
 		int i=0;
 		for (PlayCard card : userCards) {
-			if (card.isEnable()){
-				// check if inside the bounds of the card
-				// get the center for the ball
-				int centerX = card.getX() + 32;
-				int centerY = card.getY() + 42;
+			if(card!=null){
 
-				// calculate the radius from the touch to the center of the card
-				int radCardX  = (centerX-x);
-				int radCardY  = (centerY-y);
-				if(radCardX<0){
-					radCardX = radCardX*(-1);
-				}
-				if(radCardY<0){
-					radCardY = radCardY*(-1);
-				}
-				// then it must be on the card
-				if (radCardX <= 32 && radCardY <= 42){
-					cardReturn = card;
-					break;
+				if (card.isEnable()){
+					// check if inside the bounds of the card
+					// get the center for the ball
+					int centerX = card.getX() + 32;
+					int centerY = card.getY() + 42;
+
+					// calculate the radius from the touch to the center of the card
+					int radCardX  = (centerX-x);
+					int radCardY  = (centerY-y);
+					if(radCardX<0){
+						radCardX = radCardX*(-1);
+					}
+					if(radCardY<0){
+						radCardY = radCardY*(-1);
+					}
+					// then it must be on the card
+					if (radCardX <= 32 && radCardY <= 42){
+						userCards[i]=null;
+						break;
+					}
 				}
 			}
 			i++;
 		}
-		return cardReturn;
 	}
 	//----------------------------------------------------------------------------------
 	public void initIds() {
@@ -138,7 +166,14 @@ public class UserCardsManager {
 		}
 	}
 	//----------------------------------------------------------------------------------
-	public void setCard(PlayCard card) {
-		userCards.add(card);
+	public void setCard(PlayCard cardAux) {
+		int i=0;
+		for (PlayCard card : userCards) {
+			if(card==null){
+				userCards[i]=cardAux;
+				break;
+			}
+			i++;
+		}
 	}
 }
