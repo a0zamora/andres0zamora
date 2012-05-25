@@ -26,15 +26,17 @@ public class PlayCard {
 	private boolean enable = true;
 	private boolean tableCard = false;
 	//----------------------------------------------------------------------------------
+	public PlayCard() {}
+	//----------------------------------------------------------------------------------
 	public PlayCard(Context context, int drawable, Point point) {
 		this.context= context;
 //		BitmapFactory.Options opts = new BitmapFactory.Options();
 //		opts.inJustDecodeBounds = true;
 		img = BitmapFactory.decodeResource(context.getResources(), drawable); 
 		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.fireicon); 
-		//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.earthicon); 
-		//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.watericon); 
-		//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.windicon); 
+//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.earthicon); 
+//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.watericon); 
+//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.windicon); 
 		northPower = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
 		southPower = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
 		eastPower = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
@@ -46,10 +48,6 @@ public class PlayCard {
 
 
 
-	}
-	//----------------------------------------------------------------------------------
-	public PlayCard() {
-		// TODO Auto-generated constructor stub
 	}
 	//----------------------------------------------------------------------------------
 	public void drawCard(Canvas canvas) {
