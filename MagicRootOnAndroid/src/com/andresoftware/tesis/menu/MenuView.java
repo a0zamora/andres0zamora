@@ -2,7 +2,9 @@ package com.andresoftware.tesis.menu;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.andresoftware.tesis.gen.R;
 import com.andresoftware.tesis.mainactivity.MagicRootActivity;
@@ -27,6 +29,17 @@ public static void initMenu(final MagicRootActivity main) {
 			main.changeViewToChat();
 		}
 	});
+	ImageView img = (ImageView) main.findViewById(R.id.imageView1);
+	img.setOnClickListener(new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Toast.makeText(main.getBaseContext(), "MagicRoot", 
+					Toast.LENGTH_LONG).show();
+		}
+	});
+	
 //	LinearLayout linearLayout = (LinearLayout) main.findViewById(R.id.LinearLayout1);
 //	linearLayout.addView(new MagicRootTable(main, main.getBaseContext(), main));
 }

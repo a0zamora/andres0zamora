@@ -16,6 +16,7 @@ import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 public class MagicRootGame extends SurfaceView {
 	private OpponentCardsManager opponentCards;
@@ -26,11 +27,14 @@ public class MagicRootGame extends SurfaceView {
 	private MagicRootActivity context;
 	private SurfaceHolder holder;	// Necessary for animations
 	private GameLoopThread gameLoopThread;	// Necessary for animations
+	private MagicRootActivity mgrt;
 	//----------------------------------------------------------------------------------
 	public MagicRootGame(Context context , 
 			Context baseContext, 
 			MagicRootActivity cntx) {
 		super(context);
+		mgrt=cntx;
+		
 		userCards = new UserCardsManager(context);
 		opponentCards = new OpponentCardsManager(context);
 
@@ -120,6 +124,8 @@ public class MagicRootGame extends SurfaceView {
 					movingCard.setEnable(true);
 					userCards.setCard(movingCard.clone());
 					movingCard=null;
+//					Toast.makeText(mgrt.getBaseContext(), "MagicRoot", 
+//							Toast.LENGTH_LONG).show();
 				}
 			}
 			break; 
