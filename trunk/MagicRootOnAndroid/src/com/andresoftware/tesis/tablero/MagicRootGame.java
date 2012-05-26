@@ -1,10 +1,4 @@
 package com.andresoftware.tesis.tablero;
-
-
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.andresoftware.tesis.gen.R;
 import com.andresoftware.tesis.mainactivity.MagicRootActivity;
 
@@ -12,11 +6,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.Toast;
 
 public class MagicRootGame extends SurfaceView {
 	private OpponentCardsManager opponentCards;
@@ -34,42 +26,14 @@ public class MagicRootGame extends SurfaceView {
 			MagicRootActivity cntx) {
 		super(context);
 		mgrt=cntx;
-		
 		userCards = new UserCardsManager(context);
 		opponentCards = new OpponentCardsManager(context);
-
-		gameLoopThread = new GameLoopThread(this);
-		holder = getHolder();
-		holder.addCallback(new SurfaceHolder.Callback() {
-
-			@Override
-			public void surfaceDestroyed(SurfaceHolder holder) {
-				boolean retry = true;
-				gameLoopThread.setRunning(false);
-				while (retry) {
-					try {
-						gameLoopThread.join();
-						retry = false;
-					} catch (InterruptedException e) {
-					}
-				}
-			}
-
-			@Override
-			public void surfaceCreated(SurfaceHolder holder) {
-				gameLoopThread.setRunning(true);
-				gameLoopThread.start();
-			}
-
-			@Override
-			public void surfaceChanged(SurfaceHolder holder, int format,
-					int width, int height) {
-			}
-		});
+		initGameLoop();
 		this.context=cntx;
 		setFocusable(true); //necessary for getting the touch events
 		initGUI();
 	}
+	
 	//----------------------------------------------------------------------------------
 	// the method that draws the game
 	@Override protected void onDraw(Canvas canvas) {
@@ -90,7 +54,6 @@ public class MagicRootGame extends SurfaceView {
 		fondo = BitmapFactory.decodeResource(context.getResources(), R.drawable.firetable); 
 	}
 	//----------------------------------------------------------------------------------
-	// events when touching the screen
 	public boolean onTouchEvent(MotionEvent event) {
 		int eventaction = event.getAction(); 
 		int X = (int)event.getX(); 
@@ -133,4 +96,36 @@ public class MagicRootGame extends SurfaceView {
 		invalidate();
 		return true; 
 	}
+	//----------------------------------------------------------------------------------
+	private void initGameLoop() {
+		gameLoopThread = new GameLoopThread(this);
+		holder = getHolder();
+		holder.addCallback(new SurfaceHolder.Callback() {
+
+			@Override
+			public void surfaceDestroyed(SurfaceHolder holder) {
+				boolean retry = true;
+				gameLoopThread.setRunning(false);
+				while (retry) {
+					try {
+						gameLoopThread.join();
+						retry = false;
+					} catch (InterruptedException e) {
+					}
+				}
+			}
+
+			@Override
+			public void surfaceCreated(SurfaceHolder holder) {
+				gameLoopThread.setRunning(true);
+				gameLoopThread.start();
+			}
+
+			@Override
+			public void surfaceChanged(SurfaceHolder holder, int format,
+					int width, int height) {
+			}
+		});
+	}
+	//----------------------------------------------------------------------------------
 }
