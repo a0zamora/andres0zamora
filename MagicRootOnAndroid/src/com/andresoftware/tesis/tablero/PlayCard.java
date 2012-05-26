@@ -90,7 +90,7 @@ public class PlayCard {
 		this.westPower = westPower;
 	}
 	//----------------------------------------------------------------------------------
-	void setX(int newValue) {
+	public void setX(int newValue) {
 		coordX = newValue;
 	}
 	//----------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ public class PlayCard {
 		return coordX;
 	}
 	//----------------------------------------------------------------------------------
-	void setY(int newValue) {
+	public void setY(int newValue) {
 		coordY = newValue;
 	}
 	//----------------------------------------------------------------------------------

@@ -13,7 +13,6 @@ public class MagicRootConnection implements Runnable {
 	public DataOutputStream dataOutputStream = null;
 	public DataInputStream dataInputStream = null;
 	private MagicRootActivity magicRootActivity;
-	protected static final int MSG_ID = 01337;
 	//----------------------------------------------------------------------------------
 	public MagicRootConnection(MagicRootActivity magicRootActivity) {
 		this.magicRootActivity=magicRootActivity;
@@ -27,7 +26,7 @@ public class MagicRootConnection implements Runnable {
 			dataInputStream = new DataInputStream(socket.getInputStream());
 			while(true){
 				Message m = new Message();
-                m.what = MSG_ID;
+                m.what = CommandsIDs.MSG_ID;
 				String dataInput = dataInputStream.readUTF();
 				magicRootActivity.setMessage(dataInput);
 				magicRootActivity.getHandler().sendMessage(m);

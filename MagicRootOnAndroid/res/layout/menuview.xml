@@ -43,8 +43,9 @@
                 android:layout_margin="15dp"
                 android:background="@drawable/blue"
                 android:text="Sell Cards" />
-
+
             <Button
+                android:id="@+id/testRoomButton"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:layout_margin="15dp"

@@ -61,8 +61,8 @@ public class OpponentCardsManager {
 	//----------------------------------------------------------------------------------
 	public void initIds() {
 		int id=0;
-		for(PlayCard ball: opponentCards){
-			ball.setId(id);
+		for(PlayCard card: opponentCards){
+			card.setId(id);
 			id++;
 		}
 	}

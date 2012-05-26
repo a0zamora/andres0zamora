@@ -29,6 +29,14 @@ public static void initMenu(final MagicRootActivity main) {
 			main.changeViewToChat();
 		}
 	});
+	Button buttonTestRoom = (Button) main.findViewById(R.id.testRoomButton);
+	buttonTestRoom.setOnClickListener(new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			main.changeViewToTestRoom();
+		}
+	});
 	ImageView img = (ImageView) main.findViewById(R.id.imageView1);
 	img.setOnClickListener(new View.OnClickListener() {
 		
@@ -39,6 +47,7 @@ public static void initMenu(final MagicRootActivity main) {
 					Toast.LENGTH_LONG).show();
 		}
 	});
+	
 	
 //	LinearLayout linearLayout = (LinearLayout) main.findViewById(R.id.LinearLayout1);
 //	linearLayout.addView(new MagicRootTable(main, main.getBaseContext(), main));
