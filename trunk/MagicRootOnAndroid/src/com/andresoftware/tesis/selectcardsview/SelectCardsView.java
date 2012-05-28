@@ -25,13 +25,18 @@ public class SelectCardsView extends SurfaceView{
 	private SurfaceHolder holder;	// Necessary for animations
 	private SelectCardsMannager selectCardsMannager;  // Cards to select
 	private MagicRootActivity mgr = null;
+	private int width;
+	private int height;
 
 	//----------------------------------------------------------------------------------
-	public SelectCardsView(Context context, MagicRootActivity mgr) {
+	public SelectCardsView(Context context, MagicRootActivity mgrt) {
 		super(context);
-		this.mgr = mgr;
+		Display display = mgrt.getWindowManager().getDefaultDisplay();
+		width = display.getWidth();
+		height = display.getHeight();
+		this.mgr = mgrt;
 		fondo = BitmapFactory.decodeResource(context.getResources(), R.drawable.firetable); 
-		selectCardsMannager = new SelectCardsMannager(context);
+		selectCardsMannager = new SelectCardsMannager(context, width, height);
 		initGameLoop();
 	}
 	//----------------------------------------------------------------------------------

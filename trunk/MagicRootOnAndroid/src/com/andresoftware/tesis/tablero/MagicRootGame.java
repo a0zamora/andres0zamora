@@ -6,9 +6,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 public class MagicRootGame extends SurfaceView {
 	private OpponentCardsManager opponentCards;
@@ -20,18 +22,24 @@ public class MagicRootGame extends SurfaceView {
 	private SurfaceHolder holder;	// Necessary for animations
 	private GameLoopThread gameLoopThread;	// Necessary for animations
 	private MagicRootActivity mgrt;
+	private int width;
+	private int height;
 	//----------------------------------------------------------------------------------
 	public MagicRootGame(Context context , 
 			Context baseContext, 
 			MagicRootActivity cntx) {
 		super(context);
-		mgrt=cntx;
-		userCards = new UserCardsManager(context);
-		opponentCards = new OpponentCardsManager(context);
-		initGameLoop();
 		this.context=cntx;
-		setFocusable(true); //necessary for getting the touch events
+		mgrt=cntx;
+		Display display = mgrt.getWindowManager().getDefaultDisplay();
+		width = display.getWidth();
+		height = display.getHeight();
+		userCards = new UserCardsManager(context, width, height);
+		opponentCards = new OpponentCardsManager(context, width, height);
+		tableGame = new TableCardsManager(context, width, height);
 		initGUI();
+		initGameLoop();
+		setFocusable(true); //necessary for getting the touch events
 	}
 	
 	//----------------------------------------------------------------------------------
@@ -50,8 +58,10 @@ public class MagicRootGame extends SurfaceView {
 	}
 	//----------------------------------------------------------------------------------
 	private void initGUI() {
-		tableGame = new TableCardsManager(context);
-		fondo = BitmapFactory.decodeResource(context.getResources(), R.drawable.firetable); 
+		Display display = mgrt.getWindowManager().getDefaultDisplay();
+		Bitmap fondoAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.firetable); 
+		fondo = Bitmap.createScaledBitmap(fondoAux, display.getWidth(), display.getHeight(), false);
+//		fondo =BitmapFactory.decodeResource(context.getResources(), R.drawable.firetable);
 	}
 	//----------------------------------------------------------------------------------
 	public boolean onTouchEvent(MotionEvent event) {
@@ -68,8 +78,8 @@ public class MagicRootGame extends SurfaceView {
 		case MotionEvent.ACTION_MOVE:   // touch drag with the ball
 			// move the card the same as the finger
 			if (movingCard!=null) {
-				movingCard.setX(X-32);
-				movingCard.setY(Y-42);
+				movingCard.setX(X- (int)(movingCard.getWidth()/2));
+				movingCard.setY(Y- (int) (movingCard.getHeight()/2));
 			}
 			break; 
 		case MotionEvent.ACTION_UP: 

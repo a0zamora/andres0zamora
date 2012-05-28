@@ -11,43 +11,47 @@ import android.graphics.Point;
 
 public class UserCardsManager {
 	private Context context;
+	private int width;
+	private int height;
 	private PlayCard[] userCards = new PlayCard[8];
 	//----------------------------------------------------------------------------------
-	public UserCardsManager(Context context) {
+	public UserCardsManager(Context context, int width, int height) {
 		this.context=context;
+		this.width = width;
+		this.height = height;
 		Point point1 = new Point();
-		point1.x = 5;
-		point1.y = 10;
+		point1.x = (int) (width * 0.0175);
+		point1.y = (int) (height * 0.02);
 		Point point2 = new Point();
-		point2.x = 5;
-		point2.y = 105;
+		point2.x = (int) (width * 0.0175);
+		point2.y = (int) (height * 0.22);
 		Point point3 = new Point();
-		point3.x = 5;
-		point3.y = 200;
+		point3.x = (int) (width * 0.0175);
+		point3.y = (int) (height * 0.42);
 		Point point4 = new Point();
-		point4.x = 5;
-		point4.y = 295;
+		point4.x = (int) (width * 0.0175);
+		point4.y = (int) (height * 0.62);
 		Point point5= new Point();
-		point5.x = 74;
-		point5.y = 10;
+		point5.x = (int) (width * 0.08) + (int) (width * 0.025);
+		point5.y = (int) (height * 0.02);
 		Point point6= new Point();
-		point6.x = 74;
-		point6.y = 105;
+		point6.x = (int) (width * 0.08) + (int) (width * 0.025);
+		point6.y = (int) (height * 0.22);
 		Point point7= new Point();
-		point7.x = 74;
-		point7.y = 200;
+		point7.x = (int) (width * 0.08) + (int) (width * 0.025);
+		point7.y = (int) (height * 0.42);
 		Point point8= new Point();
-		point8.x = 74;
-		point8.y = 295;
+		point8.x = (int) (width * 0.08) + (int) (width * 0.025);
+		point8.y = (int) (height * 0.62);
 		// declare each card with the color
-		userCards[0] = new PlayCard(context,R.drawable.yellowcard, point1);
-		userCards[1] = new PlayCard(context,R.drawable.yellowcard, point2);
-		userCards[2] = new PlayCard(context,R.drawable.yellowcard, point3);
-		userCards[3] = new PlayCard(context,R.drawable.yellowcard, point4);
-		userCards[4] = new PlayCard(context,R.drawable.yellowcard, point5);
-		userCards[5] = new PlayCard(context,R.drawable.yellowcard, point6);
-		userCards[6] = new PlayCard(context,R.drawable.yellowcard, point7);
-		userCards[7] = new PlayCard(context,R.drawable.yellowcard, point8);
+		userCards[0] = new PlayCard(context,R.drawable.yellowcard, point1, width, height);
+		userCards[1] = new PlayCard(context,R.drawable.yellowcard, point2, width, height);
+		userCards[2] = new PlayCard(context,R.drawable.yellowcard, point3, width, height);
+		userCards[3] = new PlayCard(context,R.drawable.yellowcard, point4, width, height);
+		userCards[4] = new PlayCard(context,R.drawable.yellowcard, point5, width, height);
+		userCards[5] = new PlayCard(context,R.drawable.yellowcard, point6, width, height);
+		userCards[6] = new PlayCard(context,R.drawable.yellowcard, point7, width, height);
+		userCards[7] = new PlayCard(context,R.drawable.yellowcard, point8, width, height);
 		
 		initIds();
 	}
@@ -70,8 +74,8 @@ public class UserCardsManager {
 				if (card.isEnable()){
 					// check if inside the bounds of the card
 					// get the center for the ball
-					int centerX = card.getX() + 32;
-					int centerY = card.getY() + 42;
+					int centerX = card.getX() + (card.getWidth()/2);
+					int centerY = card.getY() + (card.getHeight()/2);
 
 					// calculate the radius from the touch to the center of the card
 					int radCardX  = (centerX-x);
@@ -83,7 +87,7 @@ public class UserCardsManager {
 						radCardY = radCardY*(-1);
 					}
 					// then it must be on the card
-					if (radCardX <= 32 && radCardY <= 42){
+					if (radCardX <= (card.getWidth()/2) && radCardY <= (card.getHeight()/2)){
 						//					cardReturn = userCards.remove(i);
 						cardReturn = card;
 						break;
@@ -103,8 +107,8 @@ public class UserCardsManager {
 				if (card.isEnable()){
 					// check if inside the bounds of the card
 					// get the center for the ball
-					int centerX = card.getX() + 32;
-					int centerY = card.getY() + 42;
+					int centerX = card.getX() + (card.getWidth()/2);
+					int centerY = card.getY() + (card.getHeight()/2);
 
 					// calculate the radius from the touch to the center of the card
 					int radCardX  = (centerX-x);
@@ -116,7 +120,7 @@ public class UserCardsManager {
 						radCardY = radCardY*(-1);
 					}
 					// then it must be on the card
-					if (radCardX <= 32 && radCardY <= 42){
+					if (radCardX <= (card.getWidth()/2) && radCardY <= (card.getHeight()/2)){
 						cardReturn = card;
 						break;
 					}
@@ -135,8 +139,8 @@ public class UserCardsManager {
 				if (card.isEnable()){
 					// check if inside the bounds of the card
 					// get the center for the ball
-					int centerX = card.getX() + 32;
-					int centerY = card.getY() + 42;
+					int centerX = card.getX() + (card.getWidth()/2);
+					int centerY = card.getY() + (card.getHeight()/2);
 
 					// calculate the radius from the touch to the center of the card
 					int radCardX  = (centerX-x);
@@ -148,7 +152,7 @@ public class UserCardsManager {
 						radCardY = radCardY*(-1);
 					}
 					// then it must be on the card
-					if (radCardX <= 32 && radCardY <= 42){
+					if (radCardX <= (card.getWidth()/2) && radCardY <= (card.getHeight()/2)){
 						userCards[i]=null;
 						break;
 					}
