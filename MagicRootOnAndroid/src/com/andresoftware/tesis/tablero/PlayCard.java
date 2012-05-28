@@ -21,26 +21,35 @@ public class PlayCard {
 	private int coordX = 0; // the x coordinate at the canvas
 	private int coordY = 0; // the y coordinate at the canvas
 	private int id; // gives every ball his own id, for now not necessary
+	private int width;
+	private int height;
 	private Thread thread;
 	Context context=null;
 	private boolean enable = true;
 	private boolean tableCard = false;
+
 	//----------------------------------------------------------------------------------
 	public PlayCard() {}
 	//----------------------------------------------------------------------------------
-	public PlayCard(Context context, int drawable, Point point) {
+	public PlayCard(Context context, int drawable, Point point, int width, int height) {
 		this.context= context;
-//		BitmapFactory.Options opts = new BitmapFactory.Options();
-//		opts.inJustDecodeBounds = true;
-		img = BitmapFactory.decodeResource(context.getResources(), drawable); 
-		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.fireicon); 
-//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.earthicon); 
-//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.watericon); 
-//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.windicon); 
-		northPower = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
-		southPower = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
-		eastPower = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
-		westPower = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
+		this.width = (int) (width*0.08);
+		this.height = (int) (height*0.18);
+		//		çcenter = BitmapFactory.decodeResource(context.getResources(), R.drawable.earthicon); 
+		//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.watericon); 
+		//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.windicon); 
+		Bitmap imgAux = BitmapFactory.decodeResource(context.getResources(), drawable); 
+		img = Bitmap.createScaledBitmap(imgAux,this.width, this.height, false);
+		Bitmap centerAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.fireicon); 
+		center = Bitmap.createScaledBitmap(centerAux,(int) (this.width*0.39),(int) (this.height*0.31), false); 
+		Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
+		northPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		Bitmap southAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
+		southPower = Bitmap.createScaledBitmap(southAux,(int) (this.width*0.25),(int) (this.height*0.22), false);  
+		Bitmap eastAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
+		eastPower = Bitmap.createScaledBitmap(eastAux,(int) (this.width*0.25),(int) (this.height*0.22), false);  
+		Bitmap westAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.testnumber); 
+		westPower = Bitmap.createScaledBitmap(westAux,(int) (this.width*0.25),(int) (this.height*0.22), false);  
 		initialPosX = point.x;
 		initialPosY = point.y;
 		coordX= point.x;
@@ -54,11 +63,16 @@ public class PlayCard {
 
 		canvas.drawBitmap(this.getBitmap(), this.getX(), this.getY(), null);
 		if(!tableCard){
-			canvas.drawBitmap(this.getBitmapCenter(), this.getX()+19, this.getY()+29, null);
-			canvas.drawBitmap(this.getBitmapNorth(), this.getX()+24, this.getY()+5, null);
-			canvas.drawBitmap(this.getBitmapSouth(), this.getX()+24, this.getY()+65, null);
-			canvas.drawBitmap(this.getBitmapEast(), this.getX()+2, this.getY()+35, null);
-			canvas.drawBitmap(this.getBitmapWest(), this.getX()+43, this.getY()+35, null);
+			canvas.drawBitmap(this.getBitmapCenter(), 
+					this.getX()+((int)(this.width*0.33)), this.getY()+((int)(this.height*0.37)), null);
+			canvas.drawBitmap(this.getBitmapNorth(), 
+					this.getX()+((int)(this.width*0.38)), this.getY()+((int)(this.height*0.05)), null);
+			canvas.drawBitmap(this.getBitmapSouth(), 
+					this.getX()+((int)(this.width*0.38)), this.getY()+((int)(this.height*0.77)), null);
+			canvas.drawBitmap(this.getBitmapEast(), 
+					this.getX()+((int)(this.width*0.73)), this.getY()+((int)(this.height*0.4)), null);
+			canvas.drawBitmap(this.getBitmapWest(), 
+					this.getX()+((int)(this.width*0.03)), this.getY()+((int)(this.height*0.4)), null);
 		}
 	}
 	//----------------------------------------------------------------------------------
@@ -226,6 +240,25 @@ public class PlayCard {
 		card.setWestPower(westPower);
 		card.setImg(img);
 		card.setContext(context);
+		card.setWidth(width);
+		card.setHeight(height);
 		return card;
 	}
+	//----------------------------------------------------------------------------------
+	public int getWidth() {
+		return width;
+	}
+	//----------------------------------------------------------------------------------
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	//----------------------------------------------------------------------------------
+	public int getHeight() {
+		return height;
+	}
+	//----------------------------------------------------------------------------------
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	//----------------------------------------------------------------------------------
 }

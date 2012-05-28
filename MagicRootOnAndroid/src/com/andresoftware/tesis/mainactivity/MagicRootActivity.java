@@ -71,7 +71,7 @@ public class MagicRootActivity extends Activity {
 	//----------------------------------------------------------------------------------
 	public void changeViewToTestRoom() {
 		currentView = CurrentWindow.testRoom;
-		setContentView(new SelectCardsView(this, this));
+		setContentView(new SelectCardsView(this, this));     
 	}
 	//----------------------------------------------------------------------------------
 	@Override

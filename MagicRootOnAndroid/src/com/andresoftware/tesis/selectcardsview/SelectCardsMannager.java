@@ -3,6 +3,7 @@ package com.andresoftware.tesis.selectcardsview;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.view.Display;
 
 import com.andresoftware.tesis.gen.R;
 import com.andresoftware.tesis.tablero.PlayCard;
@@ -11,18 +12,20 @@ public class SelectCardsMannager {
 	int numberCards = 20;
 	private PlayCard[] cardsToSelect = new PlayCard[numberCards];
 	private Point[] points = new Point[numberCards];
+	private int panelHeight;
 
 	//----------------------------------------------------------------------------------
-	public SelectCardsMannager(Context context) {
-		int aux=73;
+	public SelectCardsMannager(Context context, int width, int height) {
+		panelHeight = (int)(height*0.05);
+		int aux= (int)(width*0.09);
 		for(int i=0; i<numberCards; i++){
 			points[i] = new Point();
-			points[i].x = 5 +( i * aux );
-			points[i].y = 10;
-			cardsToSelect[i] = new PlayCard(context,R.drawable.yellowcard, points[i]);
+			points[i].x = (int)(width*0.01) +( i * aux );
+			points[i].y = (int)(height*0.05);
+			cardsToSelect[i] = new PlayCard(context,R.drawable.yellowcard, points[i], width, height);
 			cardsToSelect[i].setId(i);
 		}
-		movePanel(-2);
+//		movePanel(-2);
 	}
 	//----------------------------------------------------------------------------------
 	public void drawCards(Canvas canvas) {
@@ -32,7 +35,7 @@ public class SelectCardsMannager {
 	}
 	//----------------------------------------------------------------------------------
 	public boolean touchSelectCardsPanel(int y) {
-		if(y<95 && y > 10){
+		if(y<(cardsToSelect[0].getHeight()+panelHeight) && y > panelHeight){
 			return true;
 		}else{
 			return false;
@@ -48,7 +51,7 @@ public class SelectCardsMannager {
 			for(int i = 0 ; i < numberCards ; i++){
 				cardsToSelect[i].setX(cardsToSelect[i].getX()+ move);
 			}
-		}if(cardsToSelect[0].getX()> 3){
+		}if(cardsToSelect[0].getX()> cardsToSelect[0].getInitialPosX()){
 			for(int i = 0 ; i < numberCards ; i++){
 				cardsToSelect[i].setX(cardsToSelect[i].getInitialPosX());
 			}
