@@ -13,7 +13,7 @@ import android.view.Window;
 public class MagicRootActivity extends Activity {
 	private MagicRootConnection magicRootConnection;
 	private ChatView chatView=null;
-	String command="";
+//	String command="";
 	private Handler myUpdateHandler = null;
 	private CurrentWindow currentView = null;
 	/** Called when the activity is first created. */
@@ -30,18 +30,22 @@ public class MagicRootActivity extends Activity {
 	private void initiHandler() {
 		myUpdateHandler = new Handler() {
 			public void handleMessage(Message msg) {
-				switch (msg.what) {
-				case CommandsIDs.MSG_ID:
-					if(currentView.equals(CurrentWindow.chatView)){
-						chatView.addTextToChat(command);
-					}
-					break;
-				default:
-					break;
+				if (msg.what == CommandsIDs.MSG_ID) {
+					handleCommandMessage(msg.obj);
 				}
 				super.handleMessage(msg);
 			}
 		};
+	}
+	//----------------------------------------------------------------------------------	
+	private void handleCommandMessage(Object obj) {
+		String command = (String) obj;
+		
+		// Interpretas el comando, lo desempacas y transformas en un objeto y lo procesas
+
+		if(currentView.equals(CurrentWindow.CHAT_VIEW)){
+			chatView.addTextToChat(command);
+		}
 	}
 	//----------------------------------------------------------------------------------
 	public void connect() {
@@ -55,7 +59,7 @@ public class MagicRootActivity extends Activity {
 	}
 	//----------------------------------------------------------------------------------
 	public void changeViewToChat() { 
-		currentView = CurrentWindow.chatView;
+		currentView = CurrentWindow.CHAT_VIEW;
 		chatView = new ChatView(this);
 	}
 	//----------------------------------------------------------------------------------
@@ -94,13 +98,13 @@ public class MagicRootActivity extends Activity {
 		chatView.addTextToChat(data);
 	}
 	//----------------------------------------------------------------------------------
-	public String getMessage() {
-		return command;
-	}
+//	public String getMessage() {
+//		return command;
+//	}
 	//----------------------------------------------------------------------------------
-	public void setMessage(String message) {
-		this.command = message;
-	}
+//	public void setMessage(String message) {
+//		this.command = message;
+//	}
 	//----------------------------------------------------------------------------------
 	public MagicRootConnection getMagicRootConnection() {
 		return magicRootConnection;

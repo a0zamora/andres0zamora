@@ -1,7 +1,7 @@
 package com.andresoftware.tesis.mainactivity;
 
 public enum CurrentWindow {
-	chatView,
+	CHAT_VIEW, // TODO: Renombrar los otros
 	menuView,
 	playNowView,
 	testRoom

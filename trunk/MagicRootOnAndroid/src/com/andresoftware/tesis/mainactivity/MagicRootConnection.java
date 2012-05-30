@@ -28,7 +28,8 @@ public class MagicRootConnection implements Runnable {
 				Message m = new Message();
                 m.what = CommandsIDs.MSG_ID;
 				String dataInput = dataInputStream.readUTF();
-				magicRootActivity.setMessage(dataInput);
+				m.obj = dataInput;
+//				magicRootActivity.setMessage(dataInput);
 				magicRootActivity.getHandler().sendMessage(m);
 			}
 		} catch (UnknownHostException e) {
