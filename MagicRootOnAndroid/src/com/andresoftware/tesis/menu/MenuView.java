@@ -11,7 +11,7 @@ import com.andresoftware.tesis.mainactivity.MagicRootActivity;
 import com.andresoftware.tesis.tablero.MagicRootGame;
 
 public class MenuView {
-public static void initMenu(final MagicRootActivity main) {
+public MenuView(final MagicRootActivity main) {
 	main.setContentView(R.layout.menuview);
 	Button buttonGamerRoom = (Button) main.findViewById(R.id.button1);
 	buttonGamerRoom.setOnClickListener(new View.OnClickListener() {
