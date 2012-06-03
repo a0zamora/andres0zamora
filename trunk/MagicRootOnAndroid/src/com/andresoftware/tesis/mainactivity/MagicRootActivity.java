@@ -1,5 +1,9 @@
 package com.andresoftware.tesis.mainactivity;
 import com.andresoftware.tesis.chat.ChatView;
+import com.andresoftware.tesis.commands.CommandLoginAnswer;
+import com.andresoftware.tesis.login.CreateAccountView;
+import com.andresoftware.tesis.login.LoginView;
+import com.andresoftware.tesis.login.PrincipalView;
 import com.andresoftware.tesis.menu.MenuView;
 import com.andresoftware.tesis.selectcardsview.SelectCardsView;
 import com.andresoftware.tesis.tablero.MagicRootGame;
@@ -13,7 +17,10 @@ import android.view.Window;
 public class MagicRootActivity extends Activity {
 	private MagicRootConnection magicRootConnection;
 	private ChatView chatView=null;
-//	String command="";
+	private MenuView menuView = null;
+	private LoginView loginView = null;
+	private PrincipalView principalView = null;
+	private CreateAccountView createAccountView = null;
 	private Handler myUpdateHandler = null;
 	private CurrentWindow currentView = null;
 	/** Called when the activity is first created. */
@@ -24,7 +31,7 @@ public class MagicRootActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		initiHandler();
 		connect();
-		changeViewToMenu();	
+		changeViewToPrincipalView();	
 	}
 	//----------------------------------------------------------------------------------
 	private void initiHandler() {
@@ -41,9 +48,10 @@ public class MagicRootActivity extends Activity {
 	private void handleCommandMessage(Object obj) {
 		String command = (String) obj;
 		
-		// Interpretas el comando, lo desempacas y transformas en un objeto y lo procesas
-
-		if(currentView.equals(CurrentWindow.CHAT_VIEW)){
+		// Interpreto el comando y lo proceso
+		if(command.startsWith(CommandLoginAnswer.CADENA_COMANDO) && currentView.equals(CurrentWindow.LOGIN_VIEW)){
+			loginView.processLogin(command);
+		}else if(currentView.equals(CurrentWindow.CHAT_VIEW)){
 			chatView.addTextToChat(command);
 		}
 	}
@@ -64,23 +72,43 @@ public class MagicRootActivity extends Activity {
 	}
 	//----------------------------------------------------------------------------------
 	public void changeViewToMenu() {
-		currentView = CurrentWindow.menuView;
-		MenuView.initMenu(this);          
+		currentView = CurrentWindow.MENU_VIEW;
+		menuView = new MenuView(this);          
 	}
 	//----------------------------------------------------------------------------------
 	public void changeViewToGamerRoom() {   
-		currentView = CurrentWindow.playNowView;
+		currentView = CurrentWindow.PLAYNOW_VIEW;
 		setContentView(new MagicRootGame(this, getBaseContext(), this));             
 	}
 	//----------------------------------------------------------------------------------
+	public void changeViewToLoginView() {
+		currentView = CurrentWindow.LOGIN_VIEW;
+		loginView = new LoginView(this);
+	}
+	//----------------------------------------------------------------------------------
+	public void changeViewToCreateAccountView() {
+		currentView = CurrentWindow.CREATEACCOUNT_VIEW;
+		createAccountView = new CreateAccountView(this);
+	}
+	//----------------------------------------------------------------------------------
+	public void changeViewToPrincipalView() {
+		currentView = CurrentWindow.PRINCIPAL_VIEW;
+		principalView = new PrincipalView(this);
+	}
+	//----------------------------------------------------------------------------------
 	public void changeViewToTestRoom() {
-		currentView = CurrentWindow.testRoom;
+		currentView = CurrentWindow.TESTROOM_VIEW;
 		setContentView(new SelectCardsView(this, this));     
 	}
 	//----------------------------------------------------------------------------------
 	@Override
 	public void onBackPressed() {
-		if(currentView.equals(CurrentWindow.menuView)){
+		if(currentView.equals(CurrentWindow.MENU_VIEW)){
+			finish();
+			System.exit(0);
+		}else if(currentView.equals(CurrentWindow.LOGIN_VIEW) || currentView.equals(CurrentWindow.CREATEACCOUNT_VIEW)){
+			changeViewToPrincipalView();
+		}else if(currentView.equals(CurrentWindow.PRINCIPAL_VIEW)){
 			finish();
 			System.exit(0);
 		}else{
@@ -114,4 +142,5 @@ public class MagicRootActivity extends Activity {
 		this.magicRootConnection = magicRootConnection;
 	}
 	//----------------------------------------------------------------------------------
+	
 }
