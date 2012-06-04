@@ -1,5 +1,6 @@
 package com.andresoftware.tesis.mainactivity;
 import com.andresoftware.tesis.chat.ChatView;
+import com.andresoftware.tesis.commands.CommandCreateUserAnswer;
 import com.andresoftware.tesis.commands.CommandLoginAnswer;
 import com.andresoftware.tesis.login.CreateAccountView;
 import com.andresoftware.tesis.login.LoginView;
@@ -49,8 +50,12 @@ public class MagicRootActivity extends Activity {
 		String command = (String) obj;
 		
 		// Interpreto el comando y lo proceso
-		if(command.startsWith(CommandLoginAnswer.CADENA_COMANDO) && currentView.equals(CurrentWindow.LOGIN_VIEW)){
+		if(command.startsWith(CommandLoginAnswer.CADENA_COMANDO)
+				&& currentView.equals(CurrentWindow.LOGIN_VIEW)){
 			loginView.processLogin(command);
+		}else if(command.startsWith(CommandCreateUserAnswer.CADENA_COMANDO) 
+				&& currentView.equals(CurrentWindow.CREATEACCOUNT_VIEW)){
+			createAccountView.processLogin(command);
 		}else if(currentView.equals(CurrentWindow.CHAT_VIEW)){
 			chatView.addTextToChat(command);
 		}

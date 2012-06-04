@@ -1,5 +1,7 @@
 package com.andresoftware.tesis.login;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.opengl.Visibility;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -61,13 +63,53 @@ public class LoginView {
 	public void processLogin(String command) {
 		CommandLoginAnswer login = new CommandLoginAnswer(command);
 		if(login.isMember()){
-			Toast.makeText(main.getBaseContext(), "Welcome to MagicRoot!", 
-					Toast.LENGTH_LONG).show();
+			AlertDialog alertDialog = new AlertDialog.Builder(
+					main).create();
+
+			// Setting Dialog Title
+			alertDialog.setTitle("Success!");
+
+			// Setting Dialog Message
+			alertDialog.setMessage("Welcome to MagicRoot!!");
+
+			// Setting Icon to Dialog
+			alertDialog.setIcon(R.drawable.success_icon);
+
+			// Setting OK Button
+			alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					// Write your code here to execute after dialog closed
+				}
+			});
+
+			// Showing Alert Message
+			alertDialog.show();
 			main.changeViewToMenu();
 		}else{
-			Toast.makeText(main.getBaseContext(), "username or password incorrect", 
-					Toast.LENGTH_LONG).show();
+
+			AlertDialog alertDialog = new AlertDialog.Builder(
+					main).create();
+
+			// Setting Dialog Title
+			alertDialog.setTitle("Error!");
+
+			// Setting Dialog Message
+			alertDialog.setMessage("username or password incorrect");
+
+			// Setting Icon to Dialog
+			alertDialog.setIcon(R.drawable.error);
+
+			// Setting OK Button
+			alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					// Write your code here to execute after dialog closed
+				}
+			});
+
+			// Showing Alert Message
+			alertDialog.show();
 		}
+		
 	}
 
 }
