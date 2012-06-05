@@ -15,10 +15,12 @@ import javax.swing.event.ListDataListener;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import com.andresoftware.tesis.commands.CardTO;
 import com.andresoftware.tesis.commands.CommandCreateUser;
 import com.andresoftware.tesis.commands.CommandCreateUserAnswer;
 import com.andresoftware.tesis.commands.CommandLogin;
 import com.andresoftware.tesis.commands.CommandLoginAnswer;
+import com.andresoftware.tesis.commands.CommandPlayCards;
 import com.andresoftware.tesis.model.CartaBean;
 import com.andresoftware.tesis.model.CartasDisponiblesBean;
 import com.andresoftware.tesis.model.JugadorBean;
@@ -140,6 +142,7 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 
 		} // fin del manejo de la exepcion
 	}
+	@SuppressWarnings("unchecked")
 	private void crearNuevoUsuario(String texto) {
 		CommandCreateUser createUser = new CommandCreateUser(texto);
 		String answer="";
@@ -191,6 +194,7 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 	}
 
 	//--------------------------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
 	private void verificarLogin(String entrante) {
 		String answer="";
 		CommandLogin login = new CommandLogin(entrante);
@@ -209,14 +213,49 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 		if(!user.isEmpty()){
 			if(aux.isEmpty()){
 				answer = "true";
+				nombreUsr = login.getName();
+				CommandLoginAnswer loginAnswer = new CommandLoginAnswer(CommandLoginAnswer.CADENA_COMANDO+" "+answer);
+				enviarMensaje(loginAnswer.convertirAString());
+				enviarCartas();
 			}else{
 				answer = "false";
 			}	
 		}else{
 			answer = "false";
 		}
-		CommandLoginAnswer loginAnswer = new CommandLoginAnswer(CommandLoginAnswer.CADENA_COMANDO+" "+answer);
-		enviarMensaje(loginAnswer.convertirAString());
+	}
+
+	@SuppressWarnings("unchecked")
+	private void enviarCartas() {
+		Session sesion = SessionHibernate.getInstance().getSession();
+		sesion.beginTransaction();
+		List<JugadorBean> jugadores = new ArrayList<JugadorBean>();
+		List<CartaBean> cartas = new ArrayList<CartaBean>();
+
+		jugadores = sesion.createCriteria(JugadorBean.class)
+				.add(Restrictions.eq("nombreUsr", nombreUsr)).list();
+		for (int i = 0; i < jugadores.get(0).getCartasDisponiblesRef().size(); i++) {
+			cartas.add(i, jugadores.get(0).getCartasDisponiblesRef().get(i)
+					.getCartaRef());
+
+		}
+		sesion.beginTransaction().commit();
+		sesion.close();
+		CommandPlayCards cardsList = new CommandPlayCards();
+		for(int i=0; i<cartas.size(); i++){
+			CardTO cardAux = new CardTO();
+			cardAux.setFnorth(cartas.get(i).getFuerzanorte());	
+			cardAux.setFsouth(cartas.get(i).getFuerzasur());	
+			cardAux.setFeast(cartas.get(i).getFuerzaeste());	
+			cardAux.setFwest(cartas.get(i).getFuerzaoeste());
+			cardAux.setElement(cartas.get(i).getElemento());
+			
+			cardsList.getCardsList().add(cardAux);
+		}
+		cardsList.setNumberOfCards(cartas.size());
+		
+		enviarMensaje(cardsList.convertirAString());
+		
 	}
 
 	//*********************************************************************//
@@ -295,6 +334,7 @@ public class HiloDeCliente implements Runnable, ListDataListener {
 	public void enviarMensaje(String text) {
 		try {
 			dataOutput.writeUTF(text);
+			System.err.println("Data saliente: "+text);
 		} catch (IOException e) {
 			System.err.println("Error Enviando Jugada");
 		}

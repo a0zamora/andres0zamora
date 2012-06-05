@@ -659,6 +659,7 @@ public class LLenarBaseDatos {
 			CartasDisponiblesBean disponiblesA8 = new CartasDisponiblesBean();
 			CartasDisponiblesBean disponiblesA9 = new CartasDisponiblesBean();
 			CartasDisponiblesBean disponiblesA10 = new CartasDisponiblesBean();
+			CartasDisponiblesBean disponiblesA11 = new CartasDisponiblesBean();
 			
 			disponiblesJ1.setJugadorRef(jesus);
 			disponiblesA1.setJugadorRef(andres);
@@ -719,10 +720,14 @@ public class LLenarBaseDatos {
 			disponiblesA9.setJugadorRef(andres);
 			disponiblesA9.setCartaRef(carta9);
 			andres.getCartasDisponiblesRef().add(disponiblesA9);
-			
+
 			disponiblesA10.setJugadorRef(andres);
 			disponiblesA10.setCartaRef(carta10);
 			andres.getCartasDisponiblesRef().add(disponiblesA10);
+			
+			disponiblesA11.setJugadorRef(andres);
+			disponiblesA11.setCartaRef(carta11);
+			andres.getCartasDisponiblesRef().add(disponiblesA11);
 
 			//***********************************************************************************
 
