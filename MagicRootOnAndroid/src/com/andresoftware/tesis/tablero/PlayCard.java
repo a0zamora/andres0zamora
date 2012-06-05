@@ -29,13 +29,17 @@ public class PlayCard {
 	private boolean tableCard = false;
 
 	//----------------------------------------------------------------------------------
-	public PlayCard() {}
+	public PlayCard(int width2, int height2, Context context2) {
+		this.width = (int) (width2*0.08);
+		this.height = (int) (height2*0.18);
+		context = context2;
+	}
 	//----------------------------------------------------------------------------------
 	public PlayCard(Context context, int drawable, Point point, int width, int height) {
 		this.context= context;
 		this.width = (int) (width*0.08);
 		this.height = (int) (height*0.18);
-		//		çcenter = BitmapFactory.decodeResource(context.getResources(), R.drawable.earthicon); 
+		//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.earthicon); 
 		//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.watericon); 
 		//		center = BitmapFactory.decodeResource(context.getResources(), R.drawable.windicon); 
 		Bitmap imgAux = BitmapFactory.decodeResource(context.getResources(), drawable); 
@@ -57,6 +61,10 @@ public class PlayCard {
 
 
 
+	}
+	//----------------------------------------------------------------------------------
+	public PlayCard() {
+		// TODO Auto-generated constructor stub
 	}
 	//----------------------------------------------------------------------------------
 	public void drawCard(Canvas canvas) {
@@ -88,20 +96,157 @@ public class PlayCard {
 		this.center = center;
 	}
 	//----------------------------------------------------------------------------------
-	public void setNorthPower(Bitmap northPower) {
-		this.northPower = northPower;
+	public void setNorthPower(int northPower) {
+		if(northPower==1){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.one); 
+			this.northPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		}else if(northPower==2){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.two); 
+			this.northPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(northPower==3){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.three); 
+			this.northPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(northPower==4){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.four); 
+			this.northPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(northPower==5){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.five); 
+			this.northPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(northPower==6){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.six); 
+			this.northPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(northPower==7){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.seven); 
+			this.northPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(northPower==8){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.eight); 
+			this.northPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(northPower==9){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.nine); 
+			this.northPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}
 	}
 	//----------------------------------------------------------------------------------
-	public void setSouthPower(Bitmap southPower) {
-		this.southPower = southPower;
+	public void setSouthPower(int southPower) {
+		if(southPower==1){
+		Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.one); 
+		this.southPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+	}else if(southPower==2){
+		Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.two); 
+		this.southPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		
+	}else if(southPower==3){
+		Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.three); 
+		this.southPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		
+	}else if(southPower==4){
+		Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.four); 
+		this.southPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		
+	}else if(southPower==5){
+		Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.five); 
+		this.southPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		
+	}else if(southPower==6){
+		Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.six); 
+		this.southPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		
+	}else if(southPower==7){
+		Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.seven); 
+		this.southPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		
+	}else if(southPower==8){
+		Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.eight); 
+		this.southPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		
+	}else if(southPower==9){
+		Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.nine); 
+		this.southPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+	}
 	}
 	//----------------------------------------------------------------------------------
-	public void setEastPower(Bitmap eastPower) {
-		this.eastPower = eastPower;
+	public void setEastPower(int eastPower) {
+		if(eastPower==1){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.one); 
+			this.eastPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		}else if(eastPower==2){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.two); 
+			this.eastPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(eastPower==3){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.three); 
+			this.eastPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(eastPower==4){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.four); 
+			this.eastPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(eastPower==5){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.five); 
+			this.eastPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(eastPower==6){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.six); 
+			this.eastPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(eastPower==7){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.seven); 
+			this.eastPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(eastPower==8){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.eight); 
+			this.eastPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(eastPower==9){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.nine); 
+			this.eastPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		}
 	}
 	//----------------------------------------------------------------------------------
-	public void setWestPower(Bitmap westPower) {
-		this.westPower = westPower;
+	public void setWestPower(int westPower) {
+		if(westPower==1){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.one); 
+			this.westPower= Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		}else if(westPower==2){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.two); 
+			this.westPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(westPower==3){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.three); 
+			this.westPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(westPower==4){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.four); 
+			this.westPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(westPower==5){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.five); 
+			this.westPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(westPower==6){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.six); 
+			this.westPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(westPower==7){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.seven); 
+			this.westPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(westPower==8){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.eight); 
+			this.westPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+			
+		}else if(westPower==9){
+			Bitmap northAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.nine); 
+			this.westPower = Bitmap.createScaledBitmap(northAux,(int) (this.width*0.25),(int) (this.height*0.22), false);
+		}
 	}
 	//----------------------------------------------------------------------------------
 	public void setX(int newValue) {
@@ -244,6 +389,25 @@ public class PlayCard {
 		card.setHeight(height);
 		return card;
 	}
+	private void setWestPower(Bitmap westPower2) {
+		westPower = westPower2;
+		
+	}
+	//----------------------------------------------------------------------------------
+	private void setEastPower(Bitmap eastPower2) {
+		eastPower = eastPower2;
+		
+	}
+	//----------------------------------------------------------------------------------
+	private void setSouthPower(Bitmap southPower2) {
+		southPower = southPower2;
+		
+	}
+	//----------------------------------------------------------------------------------
+	private void setNorthPower(Bitmap northPower2) {
+		northPower = northPower2;
+		
+	}
 	//----------------------------------------------------------------------------------
 	public int getWidth() {
 		return width;
@@ -261,4 +425,22 @@ public class PlayCard {
 		this.height = height;
 	}
 	//----------------------------------------------------------------------------------
+	public void setCenter(String element) {
+		if(element.equals("agua")){
+			Bitmap centerAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.watericon); 
+			center = Bitmap.createScaledBitmap(centerAux,(int) (this.width*0.39),(int) (this.height*0.31), false);
+		}
+		Bitmap imgAux = BitmapFactory.decodeResource(context.getResources(), R.drawable.yellowcard); 
+		img = Bitmap.createScaledBitmap(imgAux,this.width, this.height, false);
+		
+	}
+	public void startCard(Point point, int width2, int height2) {
+		this.width = (int) (width2*0.08);
+		this.height = (int) (height2*0.18);
+		initialPosX = point.x;
+		initialPosY = point.y;
+		coordX= point.x;
+		coordY = point.y;
+		
+	}
 }
