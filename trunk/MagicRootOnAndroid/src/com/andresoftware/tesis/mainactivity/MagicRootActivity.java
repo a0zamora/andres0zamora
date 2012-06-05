@@ -2,17 +2,20 @@ package com.andresoftware.tesis.mainactivity;
 import com.andresoftware.tesis.chat.ChatView;
 import com.andresoftware.tesis.commands.CommandCreateUserAnswer;
 import com.andresoftware.tesis.commands.CommandLoginAnswer;
+import com.andresoftware.tesis.commands.CommandPlayCards;
 import com.andresoftware.tesis.login.CreateAccountView;
 import com.andresoftware.tesis.login.LoginView;
 import com.andresoftware.tesis.login.PrincipalView;
 import com.andresoftware.tesis.menu.MenuView;
 import com.andresoftware.tesis.selectcardsview.SelectCardsView;
 import com.andresoftware.tesis.tablero.MagicRootGame;
+import com.andresoftware.tesis.user.UserInformation;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Display;
 import android.view.Window;
 
 public class MagicRootActivity extends Activity {
@@ -24,15 +27,17 @@ public class MagicRootActivity extends Activity {
 	private CreateAccountView createAccountView = null;
 	private Handler myUpdateHandler = null;
 	private CurrentWindow currentView = null;
+	private UserInformation usrInformation;
 	/** Called when the activity is first created. */
 	//----------------------------------------------------------------------------------
 	@Override
 	public void onCreate(Bundle savedInstanceState) {        
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);	
+		usrInformation = new UserInformation();
 		initiHandler();
 		connect();
-		changeViewToPrincipalView();	
+		changeViewToPrincipalView();
 	}
 	//----------------------------------------------------------------------------------
 	private void initiHandler() {
@@ -56,8 +61,20 @@ public class MagicRootActivity extends Activity {
 		}else if(command.startsWith(CommandCreateUserAnswer.CADENA_COMANDO) 
 				&& currentView.equals(CurrentWindow.CREATEACCOUNT_VIEW)){
 			createAccountView.processLogin(command);
+		}else if(command.startsWith(CommandPlayCards.CADENA_COMANDO)){
+			startUsrInformation(command);
 		}else if(currentView.equals(CurrentWindow.CHAT_VIEW)){
 			chatView.addTextToChat(command);
+		}
+	}
+	//----------------------------------------------------------------------------------
+	private void startUsrInformation(String command) {
+		CommandPlayCards commandPlayCard = new CommandPlayCards(command);
+		for(int i=0; i<commandPlayCard.getCardsList().size();i++){
+			Display display = getWindowManager().getDefaultDisplay();
+			int width = display.getWidth();
+			int height = display.getHeight();
+			usrInformation.addCard(commandPlayCard.getCardsList().get(i), width, height, this);
 		}
 	}
 	//----------------------------------------------------------------------------------
@@ -103,7 +120,7 @@ public class MagicRootActivity extends Activity {
 	//----------------------------------------------------------------------------------
 	public void changeViewToTestRoom() {
 		currentView = CurrentWindow.TESTROOM_VIEW;
-		setContentView(new SelectCardsView(this, this));     
+		setContentView(new SelectCardsView(this, this, usrInformation));     
 	}
 	//----------------------------------------------------------------------------------
 	@Override
@@ -145,6 +162,14 @@ public class MagicRootActivity extends Activity {
 	//----------------------------------------------------------------------------------
 	public void setMagicRootConnection(MagicRootConnection magicRootConnection) {
 		this.magicRootConnection = magicRootConnection;
+	}
+	//----------------------------------------------------------------------------------
+	public UserInformation getUsrInformation() {
+		return usrInformation;
+	}
+	//----------------------------------------------------------------------------------
+	public void setUsrInformation(UserInformation usrInformation) {
+		this.usrInformation = usrInformation;
 	}
 	//----------------------------------------------------------------------------------
 	

@@ -7,22 +7,28 @@ import android.view.Display;
 
 import com.andresoftware.tesis.gen.R;
 import com.andresoftware.tesis.tablero.PlayCard;
+import com.andresoftware.tesis.user.UserInformation;
 
 public class SelectCardsMannager {
-	int numberCards = 20;
-	private PlayCard[] cardsToSelect = new PlayCard[numberCards];
-	private Point[] points = new Point[numberCards];
+	int numberCards = 0;
+	private PlayCard[] cardsToSelect = null;
+	private Point[] points = null;
 	private int panelHeight;
 
 	//----------------------------------------------------------------------------------
-	public SelectCardsMannager(Context context, int width, int height) {
+	public SelectCardsMannager(Context context, int width, int height, UserInformation usrInformation) {
+		points = new Point[usrInformation.getCardsList().size()];
+		cardsToSelect = new PlayCard[usrInformation.getCardsList().size()];
+		numberCards = usrInformation.getCardsList().size();
 		panelHeight = (int)(height*0.05);
 		int aux= (int)(width*0.09);
-		for(int i=0; i<numberCards; i++){
+		for(int i=0; i<usrInformation.getCardsList().size(); i++){
 			points[i] = new Point();
 			points[i].x = (int)(width*0.01) +( i * aux );
 			points[i].y = (int)(height*0.05);
-			cardsToSelect[i] = new PlayCard(context,R.drawable.yellowcard, points[i], width, height);
+//			cardsToSelect[i] = new PlayCard(context,R.drawable.yellowcard, points[i], width, height);
+			cardsToSelect[i] = usrInformation.getCardsList().get(i);
+			cardsToSelect[i].startCard(points[i], width, height);
 			cardsToSelect[i].setId(i);
 		}
 //		movePanel(-2);

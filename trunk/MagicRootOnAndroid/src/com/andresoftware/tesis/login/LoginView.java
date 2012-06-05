@@ -39,23 +39,23 @@ public class LoginView {
 				
 			}
 		});
-		final EditText name = (EditText) magicRootActivity.findViewById(R.id.editText1);
-		name.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				name.setText("");
-			}
-		});
-		
-		final EditText pass = (EditText) magicRootActivity.findViewById(R.id.editText2);
-		pass.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				pass.setText("");
-			}
-		});
+//		final EditText name = (EditText) magicRootActivity.findViewById(R.id.editText1);
+//		name.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				name.setText("");
+//			}
+//		});
+//		
+//		final EditText pass = (EditText) magicRootActivity.findViewById(R.id.editText2);
+//		pass.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				pass.setText("");
+//			}
+//		});
 		
 		
 	}
