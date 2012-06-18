@@ -1,12 +1,12 @@
 package com.andresoftware.tesis.server;
 
-public class ClienteConexion {
+public class ClientConection {
 	
 		private String nivel;
 		private String nombreUsr;
 		
 		
-	public ClienteConexion(String nivel, String nombreUsr) {
+	public ClientConection(String nivel, String nombreUsr) {
 		this.nivel = nivel;
 		this.nombreUsr = nombreUsr;
 	}
