@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.view.Display;
+import android.widget.Toast;
 
 import com.andresoftware.tesis.gen.R;
 import com.andresoftware.tesis.tablero.PlayCard;
@@ -14,9 +15,11 @@ public class SelectCardsMannager {
 	private PlayCard[] cardsToSelect = null;
 	private Point[] points = null;
 	private int panelHeight;
+	private Context context;
 
 	//----------------------------------------------------------------------------------
 	public SelectCardsMannager(Context context, int width, int height, UserInformation usrInformation) {
+		this.context = context;
 		points = new Point[usrInformation.getCardsList().size()];
 		cardsToSelect = new PlayCard[usrInformation.getCardsList().size()];
 		numberCards = usrInformation.getCardsList().size();
@@ -66,5 +69,40 @@ public class SelectCardsMannager {
 				cardsToSelect[i].setX(cardsToSelect[i].getX()+(cardsToSelect[10].getInitialPosX()-cardsToSelect[numberCards-1].getX()));
 			}
 		}
+	}
+	public PlayCard onCard(int x, int y) {
+
+
+		PlayCard cardReturn = null;
+		for (PlayCard card : cardsToSelect) {
+
+				if (card.isEnable()){
+					// check if inside the bounds of the card
+					// get the center for the ball
+					int centerX = card.getX() + (card.getWidth()/2);
+					int centerY = card.getY() + (card.getHeight()/2);
+
+					// calculate the radius from the touch to the center of the card
+					int radCardX  = (centerX-x);
+					int radCardY  = (centerY-y);
+					if(radCardX<0){
+						radCardX = radCardX*(-1);
+					}
+					if(radCardY<0){
+						radCardY = radCardY*(-1);
+					}
+					// then it must be on the card
+					if (radCardX <= (card.getWidth()/2) && radCardY <= (card.getHeight()/2)){
+						//					cardReturn = userCards.remove(i);
+
+//						Toast.makeText(context, "MagicRoot", 
+//								Toast.LENGTH_SHORT).show();
+						card.setEnable(false);
+						cardReturn = card;
+						break;
+					}
+				}
+		}
+		return cardReturn;		
 	}
 }

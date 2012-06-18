@@ -1,16 +1,10 @@
 package com.andresoftware.tesis.selectcardsview;
 
-import com.andresoftware.tesis.gen.R;
 import com.andresoftware.tesis.mainactivity.MagicRootActivity;
-import com.andresoftware.tesis.tablero.PlayCard;
 import com.andresoftware.tesis.user.UserInformation;
-
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -21,7 +15,6 @@ public class SelectCardsView extends SurfaceView{
 
 	private boolean startAnimation = false;
 	private int coordX = 0;
-	private Bitmap fondo; //private Bitmap table;
 	private SelectCardsLoopThread selectCardsLoopThread;	// Necessary for animations
 	private SurfaceHolder holder;	// Necessary for animations
 	private SelectCardsMannager selectCardsMannager;  // Cards to select
@@ -29,13 +22,11 @@ public class SelectCardsView extends SurfaceView{
 	private MagicRootActivity mgr = null;
 	private int width;
 	private int height;
-	private UserInformation usrInformation;
 	private boolean touch;
 
 	//----------------------------------------------------------------------------------
 	public SelectCardsView(Context context, MagicRootActivity mgrt, UserInformation usrInformation) {
 		super(context);
-		this.usrInformation = usrInformation;
 		Display display = mgrt.getWindowManager().getDefaultDisplay();
 		width = display.getWidth();
 		height = display.getHeight();
@@ -47,7 +38,6 @@ public class SelectCardsView extends SurfaceView{
 	//----------------------------------------------------------------------------------
 	@Override
 	protected void onDraw(Canvas canvas) {
-//		canvas.drawBitmap(fondo, 0, 0, null);
 		canvas.drawColor(Color.BLACK);
 		selectCardsMannager.drawCards(canvas);
 		gameCardsMannager.drawCards(canvas);
@@ -75,8 +65,10 @@ public class SelectCardsView extends SurfaceView{
 			break; 
 		case MotionEvent.ACTION_UP: 
 			if(touch){
-				Toast.makeText(mgr.getBaseContext(), "MagicRoot", 
-						Toast.LENGTH_LONG).show();
+				gameCardsMannager.asignCard(selectCardsMannager.onCard(X,Y));
+				
+			}else if(!startAnimation){
+				gameCardsMannager.onCard(X,Y);
 			}
 			touch = false;
 			startAnimation = false;
@@ -85,6 +77,7 @@ public class SelectCardsView extends SurfaceView{
 		invalidate();
 		return true; 
 	}
+	//----------------------------------------------------------------------------------
 	private void initGameLoop() {
 		selectCardsLoopThread = new SelectCardsLoopThread(this);
 		holder = getHolder();
