@@ -19,16 +19,16 @@ import com.andresoftware.tesis.model.VerificarLogin;
  * @author andres
  *
  */
-public class ServidorChat
+public class MagicRootServer
 {
     /** Lista en la que se guaradara toda la conversacion */
-    private DefaultListModel charla = new DefaultListModel();
+    private DefaultListModel chatList = new DefaultListModel();
     
     /** lista de todas las partidas que han sido creadas por los Hilos de clientes */
     private List<Partida> listaPartidas;
 
     /** lista de todos los clientes que estan conectados en este momento */
-    private List<ClienteConexion> listaClienteConexion;
+    private List<ClientConection> listaClienteConexion;
     
     /**
      * Instancia esta clase.
@@ -36,14 +36,14 @@ public class ServidorChat
      */
     public static void main(String[] args)
     {
-        new ServidorChat();
+        new MagicRootServer();
     }
 
     /**
      * Se mete en un bucle infinito para ateder clientes, lanzando un hilo
      * para cada uno de ellos.
      */
-    public ServidorChat()
+    public MagicRootServer()
     {
     	IniciarTablaRegistro();
     	
@@ -54,7 +54,7 @@ public class ServidorChat
             while (true)
             {
                 Socket cliente = socketServidor.accept();//Este es el buffer compartido
-                Runnable nuevoCliente = new HiloDeCliente(charla, cliente, i,listaPartidas, listaClienteConexion);
+                Runnable nuevoCliente = new ClientThread(chatList, cliente, i,listaPartidas, listaClienteConexion);
                 Thread hilo = new Thread(nuevoCliente);
                 hilo.start();
                 i++;
@@ -67,7 +67,7 @@ public class ServidorChat
 
 	 public void IniciarTablaRegistro() {
 		listaPartidas = new ArrayList<Partida>();
-		listaClienteConexion = new ArrayList<ClienteConexion>();
+		listaClienteConexion = new ArrayList<ClientConection>();
 		Session session = SessionHibernate.getInstance().getSession();
 		session.beginTransaction();
 		List<VerificarLogin> lista;

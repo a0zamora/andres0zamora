@@ -41,7 +41,7 @@ public class Partida {
 
 	private int id; // El Id de la partida
 
-	private HiloDeCliente hiloAzul, hiloRojo; // Los dos hilos de clientes
+	private ClientThread hiloAzul, hiloRojo; // Los dos hilos de clientes
 
 	private int idHiloEnTurno, idHiloEnEspera;
 
@@ -82,7 +82,7 @@ public class Partida {
 	}
 
 	// *******************************************************************************//
-	public Partida(HiloDeCliente hiloAzul) {
+	public Partida(ClientThread hiloAzul) {
 		consultaCartasAzules = new ArrayList<Card>();
 		consultaCartasRojas = new ArrayList<Card>();
 		this.hiloAzul = hiloAzul;
@@ -94,14 +94,14 @@ public class Partida {
 		par = new HashMap<String, Object>();
 		maquina = new MaquinaEstados(this);
 		this.hiloAzul.setCreadorDePartida(true);
-		hiloRojo = new HiloDeCliente();
+		hiloRojo = new ClientThread();
 	}
 
 	// *********************************************************************//
 	// *** INTERFAZ ***//
 	// *********************************************************************//
 
-	public void Revancha(HiloDeCliente hiloAzul ,HiloDeCliente hiloRojo){
+	public void Revancha(ClientThread hiloAzul ,ClientThread hiloRojo){
 		consultaCartasAzules = new ArrayList<Card>();
 		consultaCartasRojas = new ArrayList<Card>();
 		this.hiloAzul = hiloAzul;
@@ -181,12 +181,12 @@ public class Partida {
 	}
 
 	// *******************************************************************************//
-	public void setHiloRojo(HiloDeCliente hiloRojo) {
+	public void setHiloRojo(ClientThread hiloRojo) {
 		this.hiloRojo = hiloRojo;
 	}
 
 	// *******************************************************************************//
-	public HiloDeCliente getHiloRojo() {
+	public ClientThread getHiloRojo() {
 		return hiloRojo;
 	}
 
@@ -609,7 +609,7 @@ public class Partida {
 		estado = false;
 		hiloRojo.setEstado(false);
 		hiloAzul.setEstado(false);
-		hiloAzul.enviar_a_Todos("crear " + Integer.toString(hiloAzul.getId())
+		hiloAzul.sendToAllUsers("crear " + Integer.toString(hiloAzul.getId())
 				+ " " + nombre);
 		hiloAzul.enviarMensaje("Se_desconecto_Invitado");
 	}
@@ -980,7 +980,7 @@ public class Partida {
 		enviarMensajeMaquina(comando);
 	}
 
-	public HiloDeCliente getHiloAzul() {
+	public ClientThread getHiloAzul() {
 		return hiloAzul;
 	}
 }// fin de la clase Partida
