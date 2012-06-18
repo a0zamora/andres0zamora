@@ -21,8 +21,8 @@ public class PlayCard {
 	private int coordX = 0; // the x coordinate at the canvas
 	private int coordY = 0; // the y coordinate at the canvas
 	private int id; // gives every ball his own id, for now not necessary
-	private int width;
-	private int height;
+	public int width;
+	public int height;
 	private Thread thread;
 	Context context=null;
 	private boolean enable = true;
@@ -441,6 +441,10 @@ public class PlayCard {
 		initialPosY = point.y;
 		coordX= point.x;
 		coordY = point.y;
+		
+	}
+	public boolean isEqualTo(PlayCard card) {
+		return true;
 		
 	}
 }
