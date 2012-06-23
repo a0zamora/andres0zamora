@@ -42,5 +42,11 @@ public class UserInformation {
 		cardsList.add(cardAux);
 		
 	}
+	public void setEnablesCards() {
+		for(PlayCard card : cardsList){
+			card.setEnable(true);
+		}
+			
+	}
 
 }
