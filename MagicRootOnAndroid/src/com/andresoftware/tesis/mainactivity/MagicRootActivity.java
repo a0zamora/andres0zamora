@@ -119,6 +119,7 @@ public class MagicRootActivity extends Activity {
 	}
 	//----------------------------------------------------------------------------------
 	public void changeViewToTestRoom() {
+		usrInformation.setEnablesCards();
 		currentView = CurrentWindow.TESTROOM_VIEW;
 		setContentView(new SelectCardsView(this, this, usrInformation));     
 	}
