@@ -38,6 +38,7 @@ public class UserInformation {
 		cardAux.setEastPower(cardTO.getFeast());
 		cardAux.setWestPower(cardTO.getFwest());
 		cardAux.setCenter(cardTO.getElement());
+		cardAux.setId(cardTO.getId());
 		
 		cardsList.add(cardAux);
 		
