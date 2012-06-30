@@ -3,6 +3,7 @@ import com.andresoftware.tesis.chat.ChatView;
 import com.andresoftware.tesis.commands.CommandCreateUserAnswer;
 import com.andresoftware.tesis.commands.CommandLoginAnswer;
 import com.andresoftware.tesis.commands.CommandPlayCards;
+import com.andresoftware.tesis.commands.CommandUserInformation;
 import com.andresoftware.tesis.login.CreateAccountView;
 import com.andresoftware.tesis.login.LoginView;
 import com.andresoftware.tesis.login.PrincipalView;
@@ -61,7 +62,7 @@ public class MagicRootActivity extends Activity {
 		}else if(command.startsWith(CommandCreateUserAnswer.CADENA_COMANDO) 
 				&& currentView.equals(CurrentWindow.CREATEACCOUNT_VIEW)){
 			createAccountView.processLogin(command);
-		}else if(command.startsWith(CommandPlayCards.CADENA_COMANDO)){
+		}else if(command.startsWith(CommandUserInformation.CADENA_COMANDO)){
 			startUsrInformation(command);
 		}else if(currentView.equals(CurrentWindow.CHAT_VIEW)){
 			chatView.addTextToChat(command);
@@ -69,13 +70,17 @@ public class MagicRootActivity extends Activity {
 	}
 	//----------------------------------------------------------------------------------
 	private void startUsrInformation(String command) {
-		CommandPlayCards commandPlayCard = new CommandPlayCards(command);
-		for(int i=0; i<commandPlayCard.getCardsList().size();i++){
-			Display display = getWindowManager().getDefaultDisplay();
-			int width = display.getWidth();
-			int height = display.getHeight();
-			usrInformation.addCard(commandPlayCard.getCardsList().get(i), width, height, this);
+		CommandUserInformation commandUserInformation = new CommandUserInformation(command);
+		Display display = getWindowManager().getDefaultDisplay();
+		int width = display.getWidth();
+		int height = display.getHeight();
+		usrInformation.setUsrId(commandUserInformation.getId());
+		usrInformation.setUsrName(commandUserInformation.getUserName());
+		for(int i=0; i<commandUserInformation.getUserCards().getCardsList().size();i++){
+			usrInformation.addCard(commandUserInformation.getUserCards().getCardsList().get(i), 
+					width, height, this);
 		}
+		magicRootConnection.sendCommandToServer(commandUserInformation.convertirAString());
 	}
 	//----------------------------------------------------------------------------------
 	public void connect() {
@@ -148,14 +153,6 @@ public class MagicRootActivity extends Activity {
 	public void updateChat(String data) {
 		chatView.addTextToChat(data);
 	}
-	//----------------------------------------------------------------------------------
-//	public String getMessage() {
-//		return command;
-//	}
-	//----------------------------------------------------------------------------------
-//	public void setMessage(String message) {
-//		this.command = message;
-//	}
 	//----------------------------------------------------------------------------------
 	public MagicRootConnection getMagicRootConnection() {
 		return magicRootConnection;

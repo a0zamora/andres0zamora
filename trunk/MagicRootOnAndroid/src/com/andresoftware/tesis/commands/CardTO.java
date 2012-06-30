@@ -6,6 +6,7 @@ public class CardTO {
 	private int Feast;
 	private int Fwest;
 	private String element;
+	private int id;
 	
 	public int getFnorth() {
 		return Fnorth;
@@ -49,6 +50,14 @@ public class CardTO {
 
 	public CardTO() {
 	
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.andresoftware.tesis.selectcardsview;
 
+import com.andresoftware.tesis.buttons.ReadyButton;
 import com.andresoftware.tesis.mainactivity.MagicRootActivity;
 import com.andresoftware.tesis.user.UserInformation;
 import android.content.Context;
@@ -23,14 +24,16 @@ public class SelectCardsView extends SurfaceView{
 	private int width;
 	private int height;
 	private boolean touch;
+	private ReadyButton readyButton;
 
 	//----------------------------------------------------------------------------------
 	public SelectCardsView(Context context, MagicRootActivity mgrt, UserInformation usrInformation) {
 		super(context);
+		this.mgr = mgrt;
 		Display display = mgrt.getWindowManager().getDefaultDisplay();
 		width = display.getWidth();
 		height = display.getHeight();
-		this.mgr = mgrt;
+		readyButton = new ReadyButton(width, height, context);
 		selectCardsMannager = new SelectCardsMannager(context, width, height, usrInformation);
 		gameCardsMannager = new GameCardsMannager(context, width, height);
 		initGameLoop();
@@ -41,6 +44,7 @@ public class SelectCardsView extends SurfaceView{
 		canvas.drawColor(Color.BLACK);
 		selectCardsMannager.drawCards(canvas);
 		gameCardsMannager.drawCards(canvas);
+		readyButton.draw(canvas);
 	}
 	//----------------------------------------------------------------------------------
 	@Override
