@@ -65,12 +65,6 @@ public class ClientThread implements Runnable, ListDataListener {
 	/** Para saber si este hilo es creador de una partida */
 	private boolean creadorDePartida;
 
-	/** La partida que creo este hilo o la partida a la que esta suscrito */
-	private Partida partida;
-
-	/** Lista de partidas creadas */
-	private List<Partida> partidas;
-
 	/** para saber si el hilo esta conectado a un room o a una partida */
 	private boolean estado;
 
@@ -82,9 +76,6 @@ public class ClientThread implements Runnable, ListDataListener {
 
 	private Responses responses;
 
-	/** lista de todos los clientes que estan conectados en este momento */
-	private List<ClientConection> listaClienteConexion;
-
 	/**
 	 * Crea una instancia de esta clase y se suscribe a cambios en la charla.
 	 * 
@@ -93,15 +84,12 @@ public class ClientThread implements Runnable, ListDataListener {
 	 * @param socket
 	 *            Socket con el cliente.
 	 */
-	public ClientThread(DefaultListModel charla, Socket socket, int id,
-			List<Partida> partidas, List<ClientConection> listaClienteConexion) {
+	public ClientThread(DefaultListModel charla, Socket socket, int id) {
 		estado = false;
-		this.partidas = partidas;
 		this.charla = charla;
 		this.socket = socket;
 		this.id = id;
 		creadorDePartida = false;
-		this.listaClienteConexion = listaClienteConexion;
 		responses = new Responses(this);
 
 		try {
@@ -111,8 +99,6 @@ public class ClientThread implements Runnable, ListDataListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		partida = new Partida();
-		//		partidasCliente();
 	}
 
 	public ClientThread() {
@@ -134,7 +120,7 @@ public class ClientThread implements Runnable, ListDataListener {
 					createNewUser(text);
 				}
 				else {
-					sendToAllUsers(text);
+//					sendToAllUsers(text);
 				}
 				// development debug
 				System.out.println("Llego lo siguiente: "+text);

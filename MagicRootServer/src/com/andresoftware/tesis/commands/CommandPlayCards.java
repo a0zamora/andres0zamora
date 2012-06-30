@@ -29,10 +29,13 @@ public class CommandPlayCards implements CommandInterface {
 	public CommandPlayCards(String str) {
 		Pattern p = Pattern.compile(" ");
 		String[] partes = p.split(str);
-		numberOfCards = Integer.parseInt(partes[1]);
-		int countAux=2;
+		numberOfCards = Integer.parseInt(partes[3]);
+		int countAux=4;
 		for(int i = 0; i < numberOfCards; i++){
 			CardTO cardAux = new CardTO();
+
+			cardAux.setId(Integer.parseInt(partes[countAux]));
+			countAux++;
 			cardAux.setFnorth(Integer.parseInt(partes[countAux]));
 			countAux++;
 			cardAux.setFsouth(Integer.parseInt(partes[countAux]));
@@ -49,9 +52,9 @@ public class CommandPlayCards implements CommandInterface {
 	
 	@Override
 	public String convertirAString() {
-		String information= CADENA_COMANDO+" "+numberOfCards;
+		String information= " "+numberOfCards;
 		for(int i=0; i<cardsList.size() ; i++){
-			information+= " "+ cardsList.get(i).getFnorth()+" "+
+			information+= " "+ cardsList.get(i).getId()+" "+cardsList.get(i).getFnorth()+" "+
 					cardsList.get(i).getFsouth()+" "+
 					cardsList.get(i).getFeast()+" "+
 					cardsList.get(i).getFwest()+" "+
