@@ -12,6 +12,7 @@ import com.andresoftware.tesis.commands.CommandCreateUserAnswer;
 import com.andresoftware.tesis.commands.CommandLogin;
 import com.andresoftware.tesis.commands.CommandLoginAnswer;
 import com.andresoftware.tesis.commands.CommandPlayCards;
+import com.andresoftware.tesis.commands.CommandUserInformation;
 import com.andresoftware.tesis.model.CartaBean;
 import com.andresoftware.tesis.model.CartasDisponiblesBean;
 import com.andresoftware.tesis.model.JugadorBean;
@@ -122,6 +123,8 @@ public class Responses {
 					.getCartaRef());
 
 		}
+		String userName = jugadores.get(0).getNombreUsr();
+		int userId = jugadores.get(0).getId();
 		sesion.beginTransaction().commit();
 		sesion.close();
 		CommandPlayCards cardsList = new CommandPlayCards();
@@ -132,12 +135,18 @@ public class Responses {
 			cardAux.setFeast(cartas.get(i).getFuerzaeste());	
 			cardAux.setFwest(cartas.get(i).getFuerzaoeste());
 			cardAux.setElement(cartas.get(i).getElemento());
+			cardAux.setId(cartas.get(i).getId());
 			
 			cardsList.getCardsList().add(cardAux);
 		}
 		cardsList.setNumberOfCards(cartas.size());
+		CommandUserInformation userInformation = new CommandUserInformation();
+		userInformation.setUserCards(cardsList);
+		userInformation.setId(userId);
+		userInformation.setUserName(userName);
 		
-		hilo.enviarMensaje(cardsList.convertirAString());
+		hilo.enviarMensaje(userInformation.convertirAString());
+		
 		
 	}
 

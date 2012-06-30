@@ -23,13 +23,6 @@ public class MagicRootServer
 {
     /** Lista en la que se guaradara toda la conversacion */
     private DefaultListModel chatList = new DefaultListModel();
-    
-    /** lista de todas las partidas que han sido creadas por los Hilos de clientes */
-    private List<Partida> listaPartidas;
-
-    /** lista de todos los clientes que estan conectados en este momento */
-    private List<ClientConection> listaClienteConexion;
-    
     /**
      * Instancia esta clase.
      * @param args
@@ -54,7 +47,7 @@ public class MagicRootServer
             while (true)
             {
                 Socket cliente = socketServidor.accept();//Este es el buffer compartido
-                Runnable nuevoCliente = new ClientThread(chatList, cliente, i,listaPartidas, listaClienteConexion);
+                Runnable nuevoCliente = new ClientThread(chatList, cliente, i);
                 Thread hilo = new Thread(nuevoCliente);
                 hilo.start();
                 i++;
@@ -66,8 +59,6 @@ public class MagicRootServer
 	}
 
 	 public void IniciarTablaRegistro() {
-		listaPartidas = new ArrayList<Partida>();
-		listaClienteConexion = new ArrayList<ClientConection>();
 		Session session = SessionHibernate.getInstance().getSession();
 		session.beginTransaction();
 		List<VerificarLogin> lista;
