@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<ScrollView android:id="@+id/ScrollView01"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<LinearLayout android:id="@+id/linearLayout1"
+		android:layout_height="wrap_content" android:layout_width="match_parent"
+		android:orientation="vertical" android:weightSum="1">
+
+		<TextView
+		    android:id="@+id/textView1"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:gravity="center_horizontal"
+		    android:textSize="30dip"
+		    android:text="Select a Game"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		</LinearLayout>
+	
+</ScrollView>
+</LinearLayout>
