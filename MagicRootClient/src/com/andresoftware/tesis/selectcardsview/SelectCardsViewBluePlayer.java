@@ -6,6 +6,10 @@ import com.andresoftware.tesis.mainactivity.MagicRootActivity;
 import com.andresoftware.tesis.user.UserInformation;
 import com.andresoftware.tesis.utils.DialogMagicroot;
 import com.andresoftware.tesis.gen.R;
+
+import commands.DesconectarInvitadoCommand;
+import commands.InvitadoDesconectadoCommand;
+
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -29,6 +33,7 @@ public class SelectCardsViewBluePlayer extends SurfaceView{
 	private int width;
 	private int height;
 	private boolean touch;
+	private boolean move = false;
 	public MagicRootButton startGameButton;
 	public MagicRootButton deletePlayerButton;
 
@@ -45,8 +50,11 @@ public class SelectCardsViewBluePlayer extends SurfaceView{
 		
 		startGameButton = new MagicRootButton(width, height, context, 
 				BitmapFactory.decodeResource(context.getResources(), R.drawable.startgame));
+		startGameButton.setPosY(0.82);
+		
 		deletePlayerButton = new MagicRootButton(width, height, context, 
 				BitmapFactory.decodeResource(context.getResources(), R.drawable.deleteplayer));
+		deletePlayerButton.setPosY(0.7);
 		
 		selectCardsMannager = new SelectCardsMannager(context, width, height, usrInformation, MagicRootColors.BLUE);
 		gameCardsMannager = new GameCardsMannager(context, width, height);
@@ -82,6 +90,7 @@ public class SelectCardsViewBluePlayer extends SurfaceView{
 				selectCardsMannager.movePanel((coordX-X)*(-1));
 				coordX = X;
 			}
+			move = true;
 			break; 
 		case MotionEvent.ACTION_UP: 
 			if(touch){
@@ -89,6 +98,13 @@ public class SelectCardsViewBluePlayer extends SurfaceView{
 				
 			}else if(!startAnimation){
 				gameCardsMannager.onCard(X,Y);
+			}
+			if(!move){
+				if(deletePlayerButton.touch(X,Y)){
+					mgr.getMagicRootConnection().sendCommandToServer(DesconectarInvitadoCommand.CADENA_COMANDO);
+					deletePlayerButton.setEnable(false);
+				}
+				move = false;
 			}
 			touch = false;
 			startAnimation = false;
@@ -130,8 +146,7 @@ public class SelectCardsViewBluePlayer extends SurfaceView{
 	}
 	//----------------------------------------------------------------------------------
 	public void processInvited() {
-		DialogMagicroot dialog = new DialogMagicroot(mgr, this);
-		dialog.dialogNewUser();
+		DialogMagicroot.dialogInfo(mgr, "New User", "A user has challenged you to Play");
 		deletePlayerButton.setEnable(true);
 	}
 	public void setEnableDeletePlayerButton(boolean value) {

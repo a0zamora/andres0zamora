@@ -9,21 +9,14 @@ import com.andresoftware.tesis.selectcardsview.SelectCardsViewBluePlayer;
 import com.andresoftware.tesis.selectgameview.SelectGameView;
 
 public class DialogMagicroot {
-	MagicRootActivity mgrt;
-	SelectCardsViewBluePlayer selectCards;
-	public DialogMagicroot(MagicRootActivity mgrt, SelectCardsViewBluePlayer selectCards) {
-		this.mgrt = mgrt;
-		this.selectCards = this.selectCards;
-	}
-	
-	public void dialogNewUser() {
+	public static void dialogInfo(MagicRootActivity mgrt, String title, String message) {
 		AlertDialog alertDialog = new AlertDialog.Builder(mgrt).create();
 
 		// Setting Dialog Title
-		alertDialog.setTitle("New User");
+		alertDialog.setTitle(title);
 
 		// Setting Dialog Message
-		alertDialog.setMessage("A user has challenged you to Play");
+		alertDialog.setMessage(message);
 
 		// Setting Icon to Dialog
 		alertDialog.setIcon(R.drawable.newuser);

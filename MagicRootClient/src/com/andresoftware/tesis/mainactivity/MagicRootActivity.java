@@ -15,7 +15,10 @@ import com.andresoftware.tesis.selectgameview.SelectGameView;
 import com.andresoftware.tesis.tablero.MagicRootGame;
 import com.andresoftware.tesis.user.UserInformation;
 import commands.CrearCommand;
+import commands.DesconectarInvitadoCommand;
+import commands.DesconexionJugandoCommand;
 import commands.EliminarCommand;
+import commands.InvitadoDesconectadoCommand;
 import commands.JugDesconectadoRoomCommand;
 
 import android.app.Activity;
@@ -82,6 +85,12 @@ public class MagicRootActivity extends Activity {
 			selectGameView.createNewGameButton(command);
 		}else if(currentView.equals(CurrentWindow.CREATE_GAME_BLUE_VIEW) && command.startsWith("Te_llego_un_invidato")){
 			selectCardsBlueView.processInvited();
+		}else if(currentView.equals(CurrentWindow.JOIN_GAME_RED_VIEW)&&
+				command.startsWith(JugDesconectadoRoomCommand.CADENA_COMANDO)){
+			selectCardsRedView.backToSelectGame();
+		}else if(currentView.equals(CurrentWindow.JOIN_GAME_RED_VIEW)&&
+				command.startsWith("Se_desconecto_Creador")){
+			selectCardsRedView.backToSelectGame2();
 		}
 		Log.d("MagicRoot Commands", command);
 

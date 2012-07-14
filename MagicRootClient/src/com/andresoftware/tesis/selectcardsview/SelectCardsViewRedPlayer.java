@@ -117,4 +117,12 @@ public class SelectCardsViewRedPlayer extends SurfaceView{
 		});
 	}
 	//----------------------------------------------------------------------------------
+	public void backToSelectGame() {
+		DialogMagicroot.dialogInfo(mgr, "Information", "The creator doesn't want to play with you");
+		mgr.changeViewToSelectGameView();
+	}
+	public void backToSelectGame2() {
+		DialogMagicroot.dialogInfo(mgr, "Information", "The game's Creator was Disconnected");
+		mgr.changeViewToSelectGameView();
+	}
 }

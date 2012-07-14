@@ -31,7 +31,10 @@ public class SelectGameView{
 	//----------------------------------------------------------------------------------
 	public void createNewGameButton(String command) {
 		CrearCommand createGame = new CrearCommand(command);
-		
+		for(Button but : buttonList){
+			if(but.getId()==createGame.getId())
+				return;
+		}
 		LinearLayout linearLayout = (LinearLayout) mgrt.findViewById(R.id.linearLayout1);
 		final Button button = new Button(mgrt.getBaseContext());
 		button.setText(createGame.getUsrName());
