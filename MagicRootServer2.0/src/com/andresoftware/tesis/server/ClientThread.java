@@ -27,6 +27,7 @@ import commands.CrearCommand;
 import commands.DesconectarInvitadoCommand;
 import commands.DesconexionJugandoCommand;
 import commands.EleguirTableroCommand;
+import commands.EliminarCommand;
 import commands.EnviarConectadosCommand;
 import commands.GameOver;
 import commands.HandCheck;
@@ -383,6 +384,7 @@ public class ClientThread implements Runnable, ListDataListener {
 
 		for (int i = 0; i < gameInterfaceList.size(); i++) {
 			if (gameInterface.getId() == gameInterfaceList.get(i).getId()) {
+				enviar_a_Todos(EliminarCommand.CADENA_COMANDO+" "+gameInterface.getId());
 				gameInterfaceList.remove(i);
 				break;
 			}
